@@ -6,13 +6,13 @@ endif()
 
 include_directories(${MODULE_TLIB_DIR}/include)
 
-add_library (aurora-tlib SHARED ${MODULE_TLIB_SOURCE_DIR}/CircularShift.cpp
+add_library (aurorafw-tlib SHARED ${MODULE_TLIB_SOURCE_DIR}/CircularShift.cpp
                             	${MODULE_TLIB_SOURCE_DIR}/Endian.cpp
                                 ${MODULE_TLIB_SOURCE_DIR}/IOStream.cpp
                                 ${MODULE_TLIB_SOURCE_DIR}/String.cpp
 								${MODULE_TLIB_SOURCE_DIR}/Memory.c)
 
 #Temporary Link
-target_link_libraries(aurora-tlib aurora-io)
+target_link_libraries(aurorafw-tlib aurorafw-io)
 
-set_target_properties(aurora-tlib PROPERTIES OUTPUT_NAME aurora-tlib)
+set_target_properties(aurorafw-tlib PROPERTIES OUTPUT_NAME aurorafw-tlib)
