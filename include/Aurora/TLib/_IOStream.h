@@ -34,9 +34,4 @@
 	#include <iostream>
 #endif
 
-namespace Ar
-{
-
-}
-
 #endif // INCLUDE_H_AURORA_TLIB_IOSTREAM

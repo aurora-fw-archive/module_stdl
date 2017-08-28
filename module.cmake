@@ -8,7 +8,6 @@ include_directories(${MODULE_TLIB_DIR}/include)
 
 add_library (aurorafw-tlib SHARED ${MODULE_TLIB_SOURCE_DIR}/CircularShift.cpp
                             	${MODULE_TLIB_SOURCE_DIR}/Endian.cpp
-                                ${MODULE_TLIB_SOURCE_DIR}/IOStream.cpp
                                 ${MODULE_TLIB_SOURCE_DIR}/String.cpp
 								${MODULE_TLIB_SOURCE_DIR}/Memory.c)
 
