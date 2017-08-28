@@ -12,6 +12,7 @@ add_library (aurora-tlib SHARED ${MODULE_TLIB_SOURCE_DIR}/CircularShift.cpp
                                 ${MODULE_TLIB_SOURCE_DIR}/String.cpp
 								${MODULE_TLIB_SOURCE_DIR}/Memory.c)
 
+#Temporary Link
 target_link_libraries(aurora-tlib aurora-io)
 
 set_target_properties(aurora-tlib PROPERTIES OUTPUT_NAME aurora-tlib)
