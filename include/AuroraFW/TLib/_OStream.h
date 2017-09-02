@@ -1,6 +1,3 @@
-# module-tlib
-
-```cpp
 /****************************************************************************
 ** ┌─┐┬ ┬┬─┐┌─┐┬─┐┌─┐  ┌─┐┬─┐┌─┐┌┬┐┌─┐┬ ┬┌─┐┬─┐┬┌─
 ** ├─┤│ │├┬┘│ │├┬┘├─┤  ├┤ ├┬┘├─┤│││├┤ ││││ │├┬┘├┴┐
@@ -18,4 +15,14 @@
 ** ensure the GNU Lesser General Public License version 3 requirements
 ** will be met: https://www.gnu.org/licenses/lgpl-3.0.html.
 ****************************************************************************/
-```
+
+#ifndef AURORAFW_TLIB__OSTREAM_H
+#define AURORAFW_TLIB__OSTREAM_H
+
+#include <AuroraFW/TLib/Target/CCPlusPlus.h>
+
+#ifdef AFW_TARGET_CXX
+	#include <ostream>
+#endif
+
+#endif // AURORAFW_TLIB__OSTREAM_H

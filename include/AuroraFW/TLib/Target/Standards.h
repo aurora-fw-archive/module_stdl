@@ -1,6 +1,3 @@
-# module-tlib
-
-```cpp
 /****************************************************************************
 ** ┌─┐┬ ┬┬─┐┌─┐┬─┐┌─┐  ┌─┐┬─┐┌─┐┌┬┐┌─┐┬ ┬┌─┐┬─┐┬┌─
 ** ├─┤│ │├┬┘│ │├┬┘├─┤  ├┤ ├┬┘├─┤│││├┤ ││││ │├┬┘├┴┐
@@ -18,4 +15,16 @@
 ** ensure the GNU Lesser General Public License version 3 requirements
 ** will be met: https://www.gnu.org/licenses/lgpl-3.0.html.
 ****************************************************************************/
-```
+
+//TODO: Need to be documented
+
+#ifndef AURORAFW_TLIB_TARGET_STANDARDS_H
+#define AURORAFW_TLIB_TARGET_STANDARDS_H
+
+#ifdef __STRICT_ANSI__
+	#if __STRICT_ANSI__ == 1
+		#define AFW_TARGET_STRICT_ANSI
+	#endif
+#endif
+
+#endif // AURORAFW_TLIB_TARGET_STANDARDS_H

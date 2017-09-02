@@ -1,46 +1,39 @@
-/// "src/aurora-core-tlib/String.cpp" -*- C++ -*-
-/// ┌─┐┬ ┬┬─┐┌─┐┬─┐┌─┐  ┌─┐┬─┐┌─┐┌┬┐┌─┐┬ ┬┌─┐┬─┐┬┌─ | Powerful, Scalable and Cross Platform Framework
-/// ├─┤│ │├┬┘│ │├┬┘├─┤  ├┤ ├┬┘├─┤│││├┤ ││││ │├┬┘├┴┐ | @author Luís Ferreira
-/// ┴ ┴└─┘┴└─└─┘┴└─┴ ┴  └  ┴└─┴ ┴┴ ┴└─┘└┴┘└─┘┴└─┴ ┴ | @license GNU Public License v3
-///  Copyright (c) 2016 - Luís Ferreira. All right reserved
-///  More information in: https://github.com/ljmf00/ (Github Page)
-
-/// This file is part of the Aurora Framework. This framework is free
-/// software; you can redistribute it and/or modify it under the
-/// terms of the GNU Lesser General Public License, v3.
-
-/* @module aurora-core-tlib
-** @title String Class (Compatible with STL)
-** @brief This is the source file of Aurora String implementation.
-** 		  It's more fast than STL String Class and it's compatible
-** 		  with STL.
+/****************************************************************************
+** ┌─┐┬ ┬┬─┐┌─┐┬─┐┌─┐  ┌─┐┬─┐┌─┐┌┬┐┌─┐┬ ┬┌─┐┬─┐┬┌─
+** ├─┤│ │├┬┘│ │├┬┘├─┤  ├┤ ├┬┘├─┤│││├┤ ││││ │├┬┘├┴┐
+** ┴ ┴└─┘┴└─└─┘┴└─┴ ┴  └  ┴└─┴ ┴┴ ┴└─┘└┴┘└─┘┴└─┴ ┴
+** A Powerful General Purpose Framework
+** More information in: https://aurora-fw.github.io/
 **
-** @TODO: Create Ar::String Normal and Conditional Operators:
-**			Conditional Operators:
-**         		- >
-**         		- <
-**         		- <=
-**         		- >=
-*/
+** Copyright (C) 2017 Aurora Framework, All rights reserved.
+**
+** This file is part of the Aurora Framework. This framework is free
+** software; you can redistribute it and/or modify it under the terms of
+** the GNU Lesser General Public License version 3 as published by the
+** Free Software Foundation and appearing in the file LICENSE included in
+** the packaging of this file. Please review the following information to
+** ensure the GNU Lesser General Public License version 3 requirements
+** will be met: https://www.gnu.org/licenses/lgpl-3.0.html.
+****************************************************************************/
 
-#include <Aurora/TLib/Target/CCPlusPlus.h>
-#include <Aurora/TLib/String.h>
-//#include <Aurora/TLib/Memory.h>
-#include <Aurora/Info/RAM.h>
-#ifdef AURORA_TARGET_CXX
+#include <AuroraFW/TLib/Target/CCPlusPlus.h>
+#include <AuroraFW/TLib/String.h>
+//#include <AuroraFW/TLib/Memory.h>
+#include <AuroraFW/Info/RAM.h>
+#ifdef AFW_TARGET_CXX
 #include <istream>
 #include <ostream>
 #include <cstring>
 #include <cwchar>
 #include <cassert>
-#elif defined(AURORA_TARGET_CC)
+#elif defined(AFW_TARGET_CC)
 #include <string.h>
 #include <wchar.h>
 #include <assert.h>
-#endif /// AURORA_TARGET_CXX
+#endif /// AFW_TARGET_CXX
 
-#ifdef AURORA_TARGET_CXX
-	namespace Ar
+#ifdef AFW_TARGET_CXX
+	namespace AuroraFW
 	{
 
 		// @brief blank constructor for new string.
@@ -399,7 +392,7 @@
 		template<>
 		void string<char>::input (std::istream &in)
 		{
-			char *tempbuf = new char[(Aurora::InfoRAM::getFreeVirtualMemory() / sizeof(char))];
+			char *tempbuf = new char[(AFW_STRING_MAX_INPUT_SIZE / sizeof(char))];
 			in >> tempbuf;
 			len = strlen(tempbuf);
 			buf = new char[size() + 1];
@@ -409,7 +402,7 @@
 		template<>
 		void string<wchar_t>::input (std::wistream &win)
 		{
-			wchar_t *tempbuf = new wchar_t[(Aurora::InfoRAM::getFreeVirtualMemory() / sizeof(wchar_t))];
+			wchar_t *tempbuf = new wchar_t[(AFW_STRING_MAX_INPUT_SIZE / sizeof(wchar_t))];
 			win >> tempbuf;
 			len = wcslen(tempbuf);
 			buf = new wchar_t[size() + 1];
@@ -470,4 +463,4 @@
 			return win;
 		}
 	}
-#endif /// AURORA_TARGET_CXX
+#endif /// AFW_TARGET_CXX

@@ -1,30 +1,31 @@
-// ┌─┐┬ ┬┬─┐┌─┐┬─┐┌─┐  ┌─┐┬─┐┌─┐┌┬┐┌─┐┬ ┬┌─┐┬─┐┬┌─ | Powerful, Scalable and Cross Platform Framework
-// ├─┤│ │├┬┘│ │├┬┘├─┤  ├┤ ├┬┘├─┤│││├┤ ││││ │├┬┘├┴┐ | @author Luís Ferreira
-// ┴ ┴└─┘┴└─└─┘┴└─┴ ┴  └  ┴└─┴ ┴┴ ┴└─┘└┴┘└─┘┴└─┴ ┴ | @license GNU Public License v3
-//  Copyright (c) 2016 - Luís Ferreira. All right reserved
-//  More information in: https://github.com/ljmf00/ (Github Page)
+/****************************************************************************
+** ┌─┐┬ ┬┬─┐┌─┐┬─┐┌─┐  ┌─┐┬─┐┌─┐┌┬┐┌─┐┬ ┬┌─┐┬─┐┬┌─
+** ├─┤│ │├┬┘│ │├┬┘├─┤  ├┤ ├┬┘├─┤│││├┤ ││││ │├┬┘├┴┐
+** ┴ ┴└─┘┴└─└─┘┴└─┴ ┴  └  ┴└─┴ ┴┴ ┴└─┘└┴┘└─┘┴└─┴ ┴
+** A Powerful General Purpose Framework
+** More information in: https://aurora-fw.github.io/
+**
+** Copyright (C) 2017 Aurora Framework, All rights reserved.
+**
+** This file is part of the Aurora Framework. This framework is free
+** software; you can redistribute it and/or modify it under the terms of
+** the GNU Lesser General Public License version 3 as published by the
+** Free Software Foundation and appearing in the file LICENSE included in
+** the packaging of this file. Please review the following information to
+** ensure the GNU Lesser General Public License version 3 requirements
+** will be met: https://www.gnu.org/licenses/lgpl-3.0.html.
+****************************************************************************/
 
-#ifndef INCLUDE_H_AURORA_TLIB_ENDIAN
-#define INCLUDE_H_AURORA_TLIB_ENDIAN 1
+#ifndef INCLUDE_H_AFW_TLIB_ENDIAN
+#define INCLUDE_H_AFW_TLIB_ENDIAN
 
-#include <Aurora/TLib/Target/PragmaOnce.h>
-#if defined(AURORA_TARGET_PRAGMA_ONCE_SUPPORT) && AURORA_TARGET_PRAGMA_ONCE_SUPPORT
-    #pragma once
-#endif
+#include <AuroraFW/TLib/Target/Platform.h>
+#include <AuroraFW/TLib/Target/Kernel.h>
+#include <AuroraFW/TLib/Target/CCPlusPlus.h>
 
-#ifndef AURORA_FW
-#define AURORA_FW 1
-#endif // AURORA_FW
-
-#ifndef AURORA_MODULE_CORE_TLIB
-	#define AURORA_MODULE_CORE_TLIB
-#endif /// AURORA_MODULE_CORE_TLIB
-
-#include <Aurora/TLib/Target/Platform.h>
-
-#if defined(AURORA_TARGET_KERNEL_LINUX) || defined(AURORA_TARGET_CYGWIN)
+#if defined(AFW_TARGET_KERNEL_LINUX) || defined(AFW_TARGET_CYGWIN)
 	#include <endian.h>
-#elif defined(AURORA_TARGET_PLATFORM_APPLE)
+#elif defined(AFW_TARGET_PLATFORM_APPLE)
 	#include <libkern/OSByteOrder.h>
 
 	#define htobe16(x) OSSwapHostToBigInt16(x)
@@ -46,9 +47,9 @@
 	#define __BIG_ENDIAN    BIG_ENDIAN
 	#define __LITTLE_ENDIAN LITTLE_ENDIAN
 	#define __PDP_ENDIAN    PDP_ENDIAN
-#elif defined(AURORA_TARGET_KERNEL_OPENBSD)
+#elif defined(AFW_TARGET_KERNEL_OPENBSD)
 	#include <sys/endian.h>
-#elif defined(AURORA_TARGET_KERNEL_NETBSD) || defined(AURORA_TARGET_KERNEL_FREEBSD) || defined(AURORA_TARGET_KERNEL_DRAGONFLY)
+#elif defined(AFW_TARGET_KERNEL_NETBSD) || defined(AFW_TARGET_KERNEL_FREEBSD) || defined(AFW_TARGET_KERNEL_DRAGONFLY)
 	#include <sys/endian.h>
 	#define be16toh(x) betoh16(x)
 	#define le16toh(x) letoh16(x)
@@ -58,7 +59,7 @@
 
 	#define be64toh(x) betoh64(x)
 	#define le64toh(x) letoh64(x)
-#elif defined(AURORA_TARGET_PLATFORM_WINDOWS)
+#elif defined(AFW_TARGET_PLATFORM_WINDOWS)
 	#include <winsock2.h>
 	#include <sys/param.h>
 
@@ -101,32 +102,32 @@
 	#define __PDP_ENDIAN    PDP_ENDIAN
 #endif
 
-#ifndef __AURORA_ENDIAN
-	#define __AURORA_ENDIAN
+#ifndef __AFW_ENDIAN
+	#define __AFW_ENDIAN
 
-	#define AURORA_HTOBE16(x) htobe16(x)
-	#define AURORA_HTOLE16(x) htole16(x)
-	#define AURORA_BE16TOH(x) be16toh(x)
-	#define AURORA_LE16TOH(x) le16toh(x)
+	#define AFW_HTOBE16(x) htobe16(x)
+	#define AFW_HTOLE16(x) htole16(x)
+	#define AFW_BE16TOH(x) be16toh(x)
+	#define AFW_LE16TOH(x) le16toh(x)
 
-	#define AURORA_HTOBE32(x) htobe32(x)
-	#define AURORA_HTOLE32(x) htole32(x)
-	#define AURORA_BE32TOH(x) be32toh(x)
-	#define AURORA_LE32TOH(x) le32toh(x)
+	#define AFW_HTOBE32(x) htobe32(x)
+	#define AFW_HTOLE32(x) htole32(x)
+	#define AFW_BE32TOH(x) be32toh(x)
+	#define AFW_LE32TOH(x) le32toh(x)
 
-	#define AURORA_HTOBE64(x) htobe64(x)
-	#define AURORA_HTOLE64(x) htole64(x)
-	#define AURORA_BE64TOH(x) be64toh(x)
-	#define AURORA_LE64TOH(x) le64toh(x)
+	#define AFW_HTOBE64(x) htobe64(x)
+	#define AFW_HTOLE64(x) htole64(x)
+	#define AFW_BE64TOH(x) be64toh(x)
+	#define AFW_LE64TOH(x) le64toh(x)
 
-	#define AURORA_ENDIAN_BYTE_ORDER    __BYTE_ORDER
-	#define AURORA_BIG_ENDIAN           __BIG_ENDIAN
-	#define AURORA_LITTLE_ENDIAN 	    __LITTLE_ENDIAN
-	#define AURORA_PDP_ENDIAN           __PDP_ENDIAN
+	#define AFW_ENDIAN_BYTE_ORDER    __BYTE_ORDER
+	#define AFW_BIG_ENDIAN           __BIG_ENDIAN
+	#define AFW_LITTLE_ENDIAN 	    __LITTLE_ENDIAN
+	#define AFW_PDP_ENDIAN           __PDP_ENDIAN
 
-	#ifdef AURORA_TARGET_CXX
-		#include <Aurora/TLib/Type.h>
-		namespace Ar
+	#ifdef AFW_TARGET_CXX
+		#include <AuroraFW/TLib/Type.h>
+		namespace AuroraFW
 		{
 			class Endian
 			{
@@ -149,4 +150,4 @@
 	#endif
 #endif
 
-#endif // INCLUDE_H_AURORA_TLIB_ENDIAN
+#endif // INCLUDE_H_AFW_TLIB_ENDIAN

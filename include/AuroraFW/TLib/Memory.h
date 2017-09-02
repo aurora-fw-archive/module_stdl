@@ -1,6 +1,3 @@
-# module-tlib
-
-```cpp
 /****************************************************************************
 ** ┌─┐┬ ┬┬─┐┌─┐┬─┐┌─┐  ┌─┐┬─┐┌─┐┌┬┐┌─┐┬ ┬┌─┐┬─┐┬┌─
 ** ├─┤│ │├┬┘│ │├┬┘├─┤  ├┤ ├┬┘├─┤│││├┤ ││││ │├┬┘├┴┐
@@ -18,4 +15,17 @@
 ** ensure the GNU Lesser General Public License version 3 requirements
 ** will be met: https://www.gnu.org/licenses/lgpl-3.0.html.
 ****************************************************************************/
-```
+
+#include <AuroraFW/TLib/Target/CCPlusPlus.h>
+#include <AuroraFW/TLib/Type.h>
+
+#ifdef AFW_TARGET_CXX
+	extern "C" {
+#endif
+		void *memcpy(void *dst, const void *src, size_t n);
+		void *memmove(void *dst, const void *src, size_t n);
+		int memcmp(const void *cs, const void *ct, size_t n);
+		void *memset(void *s, int c, size_t n);
+#ifdef AFW_TARGET_CXX
+	}
+#endif

@@ -1,6 +1,3 @@
-# module-tlib
-
-```cpp
 /****************************************************************************
 ** ┌─┐┬ ┬┬─┐┌─┐┬─┐┌─┐  ┌─┐┬─┐┌─┐┌┬┐┌─┐┬ ┬┌─┐┬─┐┬┌─
 ** ├─┤│ │├┬┘│ │├┬┘├─┤  ├┤ ├┬┘├─┤│││├┤ ││││ │├┬┘├┴┐
@@ -18,4 +15,19 @@
 ** ensure the GNU Lesser General Public License version 3 requirements
 ** will be met: https://www.gnu.org/licenses/lgpl-3.0.html.
 ****************************************************************************/
-```
+
+//TODO: Need to be documented and structured !
+
+#ifndef INCLUDE_H_AFW_LIB_TARGET_WORDSIZE
+#define INCLUDE_H_AFW_LIB_TARGET_WORDSIZE 1
+
+#include <AuroraFW/TLib/Target/DataModel.h>
+#include <AuroraFW/TLib/Target/Architecture.h>
+
+#if defined(AFW_TARGET_CPUARCH_86_64) && !defined(AFW_TARGET_DATAMODEL_ILP32)
+	#define AFW_TARGET_WORDSIZE   64
+#else
+	#define AFW_TARGET_WORDSIZE   32
+#endif
+
+#endif /// INCLUDE_H_AFW_LIB_TARGET_WORDSIZE

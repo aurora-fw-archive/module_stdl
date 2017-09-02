@@ -1,59 +1,47 @@
-/// <Aurora/Lib/String.h> -*- C/C++ Header -*-
-/// ┌─┐┬ ┬┬─┐┌─┐┬─┐┌─┐  ┌─┐┬─┐┌─┐┌┬┐┌─┐┬ ┬┌─┐┬─┐┬┌─ | Powerful, Scalable and Cross Platform Framework
-/// ├─┤│ │├┬┘│ │├┬┘├─┤  ├┤ ├┬┘├─┤│││├┤ ││││ │├┬┘├┴┐ | @author Luís Ferreira
-/// ┴ ┴└─┘┴└─└─┘┴└─┴ ┴  └  ┴└─┴ ┴┴ ┴└─┘└┴┘└─┘┴└─┴ ┴ | @license GNU Public License v3
-///  Copyright (c) 2016 - Luís Ferreira. All right reserved
-///  More information in: https://github.com/ljmf00/ (Github Page)
+/****************************************************************************
+** ┌─┐┬ ┬┬─┐┌─┐┬─┐┌─┐  ┌─┐┬─┐┌─┐┌┬┐┌─┐┬ ┬┌─┐┬─┐┬┌─
+** ├─┤│ │├┬┘│ │├┬┘├─┤  ├┤ ├┬┘├─┤│││├┤ ││││ │├┬┘├┴┐
+** ┴ ┴└─┘┴└─└─┘┴└─┴ ┴  └  ┴└─┴ ┴┴ ┴└─┘└┴┘└─┘┴└─┴ ┴
+** A Powerful General Purpose Framework
+** More information in: https://aurora-fw.github.io/
+**
+** Copyright (C) 2017 Aurora Framework, All rights reserved.
+**
+** This file is part of the Aurora Framework. This framework is free
+** software; you can redistribute it and/or modify it under the terms of
+** the GNU Lesser General Public License version 3 as published by the
+** Free Software Foundation and appearing in the file LICENSE included in
+** the packaging of this file. Please review the following information to
+** ensure the GNU Lesser General Public License version 3 requirements
+** will be met: https://www.gnu.org/licenses/lgpl-3.0.html.
+****************************************************************************/
 
-/// This file is part of the Aurora Framework. This framework is free
-/// software; you can redistribute it and/or modify it under the
-/// terms of the GNU Lesser General Public License, v3.
+#ifndef INCLUDE_H_AFW_LIB_STRING
+#define INCLUDE_H_AFW_LIB_STRING
 
-/* @module aurora-core-tlib
-** @title String Class (Compatible with STL)
-** @brief This is the header file of Aurora String implementation.
-** 		  It's more fast than STL String Class and it's compatible
-** 		  with STL.
-*/
+#define AFW_STRING_MAX_INPUT_SIZE 8192
 
-#ifndef INCLUDE_H_AURORA_LIB_STRING
-#define INCLUDE_H_AURORA_LIB_STRING    1
-
-/// Safe include
-#include <Aurora/TLib/Target/PragmaOnce.h>
-#if defined(AURORA_TARGET_PRAGMA_ONCE_SUPPORT) && AURORA_TARGET_PRAGMA_ONCE_SUPPORT
-    #pragma once
-#endif
-
-#ifndef AURORA_FW
-#define AURORA_FW 1
-#endif // AURORA_FW
-
-#ifndef AURORA_MODULE_CORE_TLIB
-	#define AURORA_MODULE_CORE_TLIB
-#endif /// AURORA_MODULE_CORE_TLIB
-
-#ifndef AURORA_STRING_MAXSIZE
-	#ifdef AURORA_WORDSIZE
-		#if AURORA_WORDSIZE == 64
-			#define AURORA_STRING_MAXSIZE   9223372036854775807
-		#elif AURORA_
-			#define AURORA_STRING_MAXSIZE   2147483647
+#ifndef AFW_STRING_MAXSIZE
+	#ifdef AFW_WORDSIZE
+		#if AFW_WORDSIZE == 64
+			#define AFW_STRING_MAXSIZE   9223372036854775807
+		#elif AFW_
+			#define AFW_STRING_MAXSIZE   2147483647
 		#endif
-	#endif /// AURORA_WORDSIZE
-#endif /// AURORA_STRING_MAXSIZE
+	#endif /// AFW_WORDSIZE
+#endif /// AFW_STRING_MAXSIZE
 
-#ifdef AURORA_TARGET_CXX
+#ifdef AFW_TARGET_CXX
 	extern "C"
 	{
-#endif /// AURORA_TARGET_CXX
+#endif /// AFW_TARGET_CXX
 		// extern
-#ifdef AURORA_TARGET_CXX
+#ifdef AFW_TARGET_CXX
 	}
 	#include <istream>
 	#include <ostream>
 
-namespace Ar
+namespace AuroraFW
 {
 	template<class charT>
 	class string
@@ -107,6 +95,6 @@ namespace Ar
 	extern std::wostream& operator << (std::wostream& wout, wString &wstr);
 	extern std::wistream& operator >> (std::wistream& win, wString &wstr);
 }
-#endif /// AURORA_TARGET_CXX
+#endif /// AFW_TARGET_CXX
 
-#endif /// INCLUDE_H_AURORA_LIB_STRING
+#endif /// INCLUDE_H_AFW_LIB_STRING

@@ -1,6 +1,3 @@
-# module-tlib
-
-```cpp
 /****************************************************************************
 ** ┌─┐┬ ┬┬─┐┌─┐┬─┐┌─┐  ┌─┐┬─┐┌─┐┌┬┐┌─┐┬ ┬┌─┐┬─┐┬┌─
 ** ├─┤│ │├┬┘│ │├┬┘├─┤  ├┤ ├┬┘├─┤│││├┤ ││││ │├┬┘├┴┐
@@ -18,4 +15,20 @@
 ** ensure the GNU Lesser General Public License version 3 requirements
 ** will be met: https://www.gnu.org/licenses/lgpl-3.0.html.
 ****************************************************************************/
-```
+
+#ifndef AURORAFW_TLIB_TARGET_ENVIRONMENT_H
+#define AURORAFW_TLIB_TARGET_ENVIRONMENT_H
+
+#include <AuroraFW/TLib/Target/Platform.h>
+
+#if defined(__unix__) || defined(__unix) || defined(unix)
+	#define AFW_TARGET_ENVIRONMENT_UNIX
+#elif defined(__CYGWIN__)
+    #define AFW_TARGET_CYGWIN
+#endif
+
+#if defined(AFW_TARGET_ENVIRONMENT_UNIX) || defined(AFW_TARGET_PLATFORM_APPLE_MAC)
+    #define AFW_TARGET_ENVIRONMENT_POSIX
+#endif
+
+#endif // AURORAFW_TLIB_TARGET_ENVIRONMENT_H
