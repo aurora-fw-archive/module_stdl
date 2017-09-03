@@ -342,28 +342,28 @@
 
 #ifdef AFW_TARGET_COMPILER_MICROSOFT
 	// Signed
-	typedef __int8 ArInt8_t;
-	typedef __int16 ArInt16_t;
-	typedef __int32 ArInt32_t;
-	typedef __int64 ArInt64_t;
+	typedef __int8 int8_t;
+	typedef __int16 int16_t;
+	typedef __int32 int32_t;
+	typedef __int64 int64_t;
 
 	// Unsigned
-	typedef unsigned __int8  ArUInt8_t;
-	typedef unsigned __int16 ArUInt16_t;
-	typedef unsigned __int32 ArUInt32_t;
-	typedef unsigned __int64 ArUInt64_t;
+	typedef unsigned __int8  uint8_t;
+	typedef unsigned __int16 uint16_t;
+	typedef unsigned __int32 uint32_t;
+	typedef unsigned __int64 uint64_t;
 #else
 // Signed
-typedef int8_t ArInt8_t;
-typedef int16_t ArInt16_t;
-typedef int32_t ArInt32_t;
-typedef int64_t ArInt64_t;
+typedef int8_t int8_t;
+typedef int16_t int16_t;
+typedef int32_t int32_t;
+typedef int64_t int64_t;
 
 // Unsigned
-typedef uint8_t ArUInt8_t;
-typedef uint16_t ArUInt16_t;
-typedef uint32_t ArUInt32_t;
-typedef uint64_t ArUInt64_t;
+typedef uint8_t uint8_t;
+typedef uint16_t uint16_t;
+typedef uint32_t uint32_t;
+typedef uint64_t uint64_t;
 #endif
 
 #define AFW_INT_MIN     (-2147483647-1)
@@ -405,14 +405,11 @@ typedef uint64_t ArUInt64_t;
 
 #define __bool_true_false_are_defined 1
 
-typedef bool ArBool_t;
-
 #ifdef AFW_TARGET_DATAMODEL_LP64
     typedef unsigned long long size_t;
 #else
     typedef unsigned long size_t;
 #endif
-typedef size_t ArSize_t;
 
 #ifndef __WCHAR_TYPE__
 #define __WCHAR_TYPE__ int
@@ -421,34 +418,21 @@ typedef size_t ArSize_t;
 typedef __WCHAR_TYPE__ wchar_t;
 #endif
 
-typedef wchar_t ArWChar_t;
-
 #ifndef __WINT_TYPE__
 #define __WINT_TYPE__ unsigned int
 #endif
 typedef __WINT_TYPE__ wint_t;
 
-typedef wint_t ArWInt_t;
-
-typedef int ArInt_t;
-typedef short int ArShort_t;
-typedef long int ArLong_t;
-typedef long long int Ar_LLong_t;
-typedef char ArChar_t;
-typedef float ArFloat_t;
-typedef double ArDouble_t;
-typedef long double ArReal_t;
-typedef unsigned char ArByte_t;
+typedef long long int llong_t;
+typedef long double real;
+typedef unsigned char byte;
 
 // Unsigned
-typedef unsigned int ArUInt_t;
-typedef unsigned char ArUChar_t;
-typedef unsigned short int ArUShort_t;
-typedef unsigned long int ArULong_t;
-typedef unsigned long long int ArULLong_t;
-
-typedef void ArSlot_t;
-typedef void ArVoid_t;
+typedef unsigned int uint_t;
+typedef unsigned char uchar_t;
+typedef unsigned short int ushort_t;
+typedef unsigned long int ulong_t;
+typedef unsigned long long int ullong_t;
 
 #ifndef NULL
 #ifdef AFW_TARGET_CXX_11
@@ -468,5 +452,28 @@ typedef void ArVoid_t;
 
 #define AFW_NULL NULL
 #define AFW_NAN NAN
+
+typedef void afwslot_t;
+typedef void ArSlot_t;
+
+typedef int ArInt_t;
+typedef uint_t ArUInt_t;
+typedef int8_t ArInt8_t;
+typedef int16_t ArInt16_t;
+typedef int32_t ArInt32_t;
+typedef int64_t ArInt64_t;
+typedef uint8_t ArUInt8_t;
+typedef uint16_t ArUInt16_t;
+typedef uint32_t ArUInt32_t;
+typedef uint64_t ArUInt64_t;
+typedef byte ArByte_t;
+typedef real ArReal_t;
+typedef size_t ArSize_t;
+typedef bool ArBool_t;
+typedef char ArChar_t;
+typedef float ArFloat_t;
+typedef double ArDouble_t;
+typedef uchar_t ArUChar_t;
+typedef void ArVoid_t;
 
 #endif // AURORAFW_TLIB_TYPE_H
