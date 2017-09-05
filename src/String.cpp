@@ -37,16 +37,19 @@
 	{
 
 		// @brief blank constructor for new string.
-		template<class charT> string<charT>::string() {}
+		template<class charT> string<charT>::string()
+			:	buf(), len() {}
 
 		/**
 		** @brief        private constructor for temporary buffer.
 		** @param cstr array of characters (string)
 		*/
 		template<class charT> string<charT>::string(size_t n)
+			:	buf(new charT[n + 1]),
+				len(n)
 		{
-			buf = new charT[n + 1];
-			len = n;
+			//buf = new charT[n + 1];
+			//len = n;
 		}
 
 		/**
@@ -55,16 +58,20 @@
 		*/
 		template<>
 		string<char>::string(const char* cstr)
+			:	buf(new char[size() + 1]),
+				len(strlen(cstr))
 		{
-			len = strlen(cstr);
-			buf = new char[size() + 1];
+			// len = strlen(cstr);
+			// buf = new char[size() + 1];
 			memcpy(buf, cstr, (size() + 1) * sizeof(char));
 		}
 		template<>
 		string<wchar_t>::string(const wchar_t* cstr)
+			:	buf(new wchar_t[size() + 1]),
+				len(wcslen(cstr))
 		{
-			len = wcslen(cstr);
-			buf = new wchar_t[size() + 1];
+			// len = wcslen(cstr);
+			// buf = new wchar_t[size() + 1];
 			memcpy(buf, cstr, (size() + 1) * sizeof(wchar_t));
 		}
 		/**
@@ -73,9 +80,11 @@
 		*/
 		template<class charT>
 		string<charT>::string(const string<charT> &str)
+			:	buf(new charT[size() + 1]),
+				len(str.size())
 		{
-			len  = str.size();
-			buf = new charT[size() + 1];
+			// len  = str.size();
+			// buf = new charT[size() + 1];
 			memcpy(buf, str.buf, (size() + 1) * sizeof(charT));
 		}
 
@@ -354,7 +363,8 @@
 		}
 
 		template<class charT>
-		inline void string<charT>::erase(size_t pos, size_t n)
+		// TODO: Delete unused compiler suppressors and define the body
+		inline void string<charT>::erase(size_t pos __attribute__((unused)), size_t n __attribute__((unused)))
 		{
 			//for(int i = )
 		}
