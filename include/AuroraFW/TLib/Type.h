@@ -25,7 +25,7 @@
 #include <AuroraFW/TLib/Target/Compiler.h>
 #include <AuroraFW/TLib/Target/Standards.h>
 
-#ifdef AFW_TARGET_COMPILER_GNU
+#if defined(AFW_TARGET_COMPILER_GNU) && !defined(AFW_TARGET_COMPILER_CLANG)
     #ifdef __INT8_TYPE__
     typedef __INT8_TYPE__ int8_t;
     #endif
