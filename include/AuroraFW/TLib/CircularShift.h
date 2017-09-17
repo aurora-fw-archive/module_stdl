@@ -26,13 +26,12 @@
 #include <AuroraFW/TLib/Limits.h>
 
 #ifdef AFW_TARGET_CXX
-	namespace AuroraFW
-	{
+	namespace AuroraFW {
 		template <typename intT>
 		#ifdef AFW_TARGET_CXX_11
 			constexpr
 		#endif
-		intT rotl(intT val, size_t len)
+		intT rotl(const intT& val, const size_t& len)
 		{
 			#if defined(AFW_TARGET_CXX_11) && _wp_force_unsigned_rotate
 				static_assert(std::is_unsigned<intT>::value, "Rotate Left only makes sense for unsigned types");
@@ -43,7 +42,7 @@
 		#ifdef AFW_TARGET_CXX_11
 			constexpr
 		#endif
-		intT rotr(intT val, size_t len)
+		intT rotr(const intT& val, const size_t& len)
 		{
 			#if defined(AFW_TARGET_CXX_11) && _wp_force_unsigned_rotate
 				static_assert(std::is_unsigned<intT>::value, "Rotate Right only makes sense for unsigned types");
@@ -51,11 +50,11 @@
 			return (val >> len) | ((unsigned) val << (-len & (sizeof(intT) * CHAR_BIT - 1)));
 		}
 #endif
-	extern inline uint32_t rotl32 (uint32_t value, unsigned int count);
-	extern inline uint32_t rotr32 (uint32_t value, unsigned int count);
+	extern inline uint32_t rotl32 (const uint32_t& value, unsigned int count);
+	extern inline uint32_t rotr32 (const uint32_t& value, unsigned int count);
 	#if AFW_TARGET_WORDSIZE == 64
-		extern inline uint64_t rotl64 (uint64_t value, unsigned int count);
-		extern inline uint64_t rotr64 (uint64_t value, unsigned int count);
+		extern inline uint64_t rotl64 (const uint64_t& value, unsigned int count);
+		extern inline uint64_t rotr64 (const uint64_t& value, unsigned int count);
 	#endif
 #ifdef AFW_TARGET_CXX
 	}

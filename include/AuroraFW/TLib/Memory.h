@@ -25,7 +25,7 @@
 		void *memcpy(void *dst, const void *src, size_t n);
 		void *memmove(void *dst, const void *src, size_t n);
 		int memcmp(const void *cs, const void *ct, size_t n);
-		void *memset(void *s, int c, size_t n);
+		void *memset(void *s, const int c, size_t n);
 #ifdef AFW_TARGET_CXX
 	}
 #endif

@@ -131,20 +131,20 @@
 		{
 			class Endian
 			{
-				static inline ArUInt16_t HtoBE16(ArUInt16_t h);
-				static inline ArUInt16_t HtoLE16(ArUInt16_t h);
-				static inline ArUInt16_t BE16toH(ArUInt16_t be);
-				static inline ArUInt16_t LE16toH(ArUInt16_t le);
+				static inline ArUInt16_t HtoBE16(const ArUInt16_t& h);
+				static inline ArUInt16_t HtoLE16(const ArUInt16_t& h);
+				static inline ArUInt16_t BE16toH(const ArUInt16_t& be);
+				static inline ArUInt16_t LE16toH(const ArUInt16_t& le);
 
-				static inline ArUInt32_t HtoBE32(ArUInt32_t h);
-				static inline ArUInt32_t HtoLE32(ArUInt32_t h);
-				static inline ArUInt32_t BE32toH(ArUInt32_t be);
-				static inline ArUInt32_t LE32toH(ArUInt32_t le);
+				static inline ArUInt32_t HtoBE32(const ArUInt32_t& h);
+				static inline ArUInt32_t HtoLE32(const ArUInt32_t& h);
+				static inline ArUInt32_t BE32toH(const ArUInt32_t& be);
+				static inline ArUInt32_t LE32toH(const ArUInt32_t& le);
 
-				static inline ArUInt64_t HtoBE64(ArUInt64_t h);
-				static inline ArUInt64_t HtoLE64(ArUInt64_t h);
-				static inline ArUInt64_t BE64toH(ArUInt64_t be);
-				static inline ArUInt64_t LE64toH(ArUInt64_t le);
+				static inline ArUInt64_t HtoBE64(const ArUInt64_t& h);
+				static inline ArUInt64_t HtoLE64(const ArUInt64_t& h);
+				static inline ArUInt64_t BE64toH(const ArUInt64_t& be);
+				static inline ArUInt64_t LE64toH(const ArUInt64_t& le);
 			};
 		}
 	#endif

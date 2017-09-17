@@ -22,25 +22,25 @@
 	namespace AuroraFW
 	{
 #endif
-	inline uint32_t rotl32 (uint32_t value, unsigned int count)
+	inline uint32_t rotl32 (const uint32_t& value, unsigned int count)
 	{
 		const unsigned int mask = (CHAR_BIT*sizeof(value)-1);
 		count &= mask;
 		return (value<<count) | (value>>( (-count) & mask ));
 	}
-	inline uint32_t rotr32 (uint32_t value, unsigned int count)
+	inline uint32_t rotr32 (const uint32_t& value, unsigned int count)
 	{
 		const unsigned int mask = (CHAR_BIT*sizeof(value)-1);
 		count &= mask;
 		return (value>>count) | (value<<( (-count) & mask ));
 	}
-	inline uint64_t rotl64 (uint64_t value, unsigned int count)
+	inline uint64_t rotl64 (const uint64_t& value, unsigned int count)
 	{
 		const unsigned int mask = (CHAR_BIT*sizeof(value)-1);
 		count &= mask;
 		return (value>>count) | (value<<( (-count) & mask ));
 	}
-	inline uint64_t rotr64 (uint64_t value, unsigned int count)
+	inline uint64_t rotr64 (const uint64_t& value, unsigned int count)
 	{
 		const unsigned int mask = (CHAR_BIT*sizeof(value)-1);
 		count &= mask;

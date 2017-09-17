@@ -60,7 +60,7 @@ int memcmp(const void *cs, const void *ct, size_t n)
 	return r;
 }
 
-void *memset(void *s, int c, size_t n)
+void *memset(void *s, const int c, size_t n)
 {
 	char *xs = s;
 
