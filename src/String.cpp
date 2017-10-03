@@ -18,33 +18,23 @@
 
 #include <AuroraFW/TLib/Target/CCPlusPlus.h>
 #include <AuroraFW/TLib/String.h>
-//#include <AuroraFW/TLib/Memory.h>
-#include <AuroraFW/Info/RAM.h>
-#ifdef AFW_TARGET_CXX
-#include <istream>
-#include <ostream>
-#include <cstring>
-#include <cwchar>
-#include <cassert>
-#elif defined(AFW_TARGET_CC)
-#include <string.h>
-#include <wchar.h>
-#include <assert.h>
-#endif /// AFW_TARGET_CXX
+#include <AuroraFW/TLib/_Assert.h>
 
 #ifdef AFW_TARGET_CXX
 	namespace AuroraFW
 	{
 
 		// @brief blank constructor for new string.
-		template<class charT> string<charT>::string()
+		template<class charT>
+		string<charT>::string()
 			:	buf(), len() {}
 
 		/**
 		** @brief        private constructor for temporary buffer.
 		** @param cstr array of characters (string)
 		*/
-		template<class charT> string<charT>::string(size_t n)
+		template<class charT>
+		string<charT>::string(size_t n)
 			:	buf(new charT[n + 1]),
 				len(n)
 		{
@@ -86,36 +76,6 @@
 			// len  = str.size();
 			// buf = new charT[size() + 1];
 			memcpy(buf, str.buf, (size() + 1) * sizeof(charT));
-		}
-
-		/**
-		** @brief destructor of string object: delete buffer ptr
-		**        (pointer).
-		*/
-		template<class charT>
-		string<charT>::~string()
-		{
-			delete [] buf;
-		}
-
-		/**
-		** @brief  function to get size of the string
-		** @return size (size of buffer)
-		*/
-		template<class charT>
-		inline size_t string<charT>::size() const
-		{
-			return len * sizeof(charT);
-		}
-
-		/**
-		** @brief  function to get length of the string
-		** @return length
-		*/
-		template<class charT>
-		inline size_t string<charT>::length() const
-		{
-			return len;
 		}
 
 		/**
@@ -219,18 +179,6 @@
 		}
 
 		/**
-		** @brief      string operator [] from index of buffer
-		** @param  i index of the buffer
-		** @return     character from the specific index of the
-		**  string / buffer.
-		*/
-		template<class charT>
-		inline charT& string<charT>::operator [] (const size_t i) const
-		{
-			return buf[i];
-		}
-
-		/**
 		** @breif		 string operator + from a char ptr
 		** @param &str char ptr
 		** @return		 string (default string + char ptr)
@@ -311,82 +259,6 @@
 			len += wcslen(str);
 			wcscat(buf, str);
 			return *this;
-		}
-
-		/**
-		** @brief			string conditional operator ==
-		** @param &str	string object
-		** @return			bool
-		*/
-		template<class charT>
-		inline bool string<charT>::operator == (const string<charT> str)
-		{
-			return (size() == str.size()) && (memcmp(buf, str.buf, sizeof(charT)) == 0);
-		}
-
-		/**
-		** @brief			string conditional operator ==
-		** @param &str	char pointer
-		** @return			bool
-		*/
-		template<>
-		inline bool string<char>::operator == (const char str)
-		{
-			return (size() == strlen(&str)) && (memcmp(buf, &str, sizeof(char)) == 0);
-		}
-		template<>
-		inline bool string<wchar_t>::operator == (const wchar_t str)
-		{
-			return (size() == wcslen(&str)) && (memcmp(buf, &str, sizeof(wchar_t)) == 0);
-		}
-
-		/**
-		** @brief			string conditional operator !=
-		** @param &str	string object
-		** @return			bool
-		*/
-		template<class charT>
-		inline bool string<charT>::operator != (const string<charT> str)
-		{
-			return (size() != str.size()) || (memcmp(buf, str.buf, sizeof(charT)) != 0);
-		}
-
-		/**
-		** @brief			string conditional operator !=
-		** @param &str	char pointer
-		** @return			bool
-		*/
-		template<class charT>
-		inline bool string<charT>::operator != (const charT* str)
-		{
-			return memcmp(buf, str, sizeof(charT));
-		}
-
-		template<class charT>
-		// TODO: Delete unused compiler suppressors and define the body
-		inline void string<charT>::erase(size_t pos __attribute__((unused)), size_t n __attribute__((unused)))
-		{
-			//for(int i = )
-		}
-
-		template<class charT>
-		inline charT* string<charT>::toCString() const
-		{
-			return buf;
-		}
-		/**
-		** @brief        function to write on the output stream (std::ostream)
-		** @param &out ostream object (output stream)
-		*/
-		template<>
-		inline void string<char>::output (std::ostream &out)
-		{
-			out << buf;
-		}
-		template<>
-		inline void string<wchar_t>::output (std::wostream &wout)
-		{
-			wout << buf;
 		}
 
 		/**
