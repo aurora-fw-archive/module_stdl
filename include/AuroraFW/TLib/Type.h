@@ -435,7 +435,7 @@ typedef unsigned long long int ullong_t;
 
 #define AFW_NULL NULL
 #define AFW_NAN NAN
-#define AFW_DONTCARE AFW_NULL
+#define AFW_DONTCARE 0
 
 typedef void afwslot_t;
 typedef void ArSlot_t;
