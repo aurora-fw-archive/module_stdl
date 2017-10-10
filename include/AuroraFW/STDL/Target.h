@@ -16,37 +16,24 @@
 ** will be met: https://www.gnu.org/licenses/lgpl-3.0.html.
 ****************************************************************************/
 
-#include <AuroraFW/STDL/CircularShift.h>
+#ifndef AURORAFW_STDL_TARGET_H
+#define AURORAFW_STDL_TARGET_H
 
-#ifdef AFW_TARGET_CXX
-	namespace AuroraFW
-	{
-#endif
-	inline uint32_t rotl32 (const uint32_t& value, unsigned int count)
-	{
-		const unsigned int mask = (CHAR_BIT*sizeof(value)-1);
-		count &= mask;
-		return (value<<count) | (value>>( (-count) & mask ));
-	}
-	inline uint32_t rotr32 (const uint32_t& value, unsigned int count)
-	{
-		const unsigned int mask = (CHAR_BIT*sizeof(value)-1);
-		count &= mask;
-		return (value>>count) | (value<<( (-count) & mask ));
-	}
-	inline uint64_t rotl64 (const uint64_t& value, unsigned int count)
-	{
-		const unsigned int mask = (CHAR_BIT*sizeof(value)-1);
-		count &= mask;
-		return (value>>count) | (value<<( (-count) & mask ));
-	}
-	inline uint64_t rotr64 (const uint64_t& value, unsigned int count)
-	{
-		const unsigned int mask = (CHAR_BIT*sizeof(value)-1);
-		count &= mask;
-		return (value>>count) | (value<<( (-count) & mask ));
-	}
+// CPU Architecture Targets
+#include <AuroraFW/STDL/Target/Architecture.h>
+// C or C++ Languages detection
+#include <AuroraFW/STDL/Target/Language.h>
+// Compiler Targets (Include detection and version)
+#include <AuroraFW/STDL/Target/Compiler.h>
+// Data Models
+#include <AuroraFW/STDL/Target/DataModel.h>
+// Options Compiler Targets
+#include <AuroraFW/STDL/Target/Options.h>
+// Platform detection
+#include <AuroraFW/STDL/Target/Platform.h>
+// Standards detections
+#include <AuroraFW/STDL/Target/Standards.h>
+// Data Type size - Word size for a specific target
+#include <AuroraFW/STDL/Target/Wordsize.h>
 
-#ifdef AFW_TARGET_CXX
-	}
-#endif
+#endif /// AURORAFW_STDL_TARGET_H

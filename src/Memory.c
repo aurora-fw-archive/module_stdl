@@ -16,7 +16,7 @@
 ** will be met: https://www.gnu.org/licenses/lgpl-3.0.html.
 ****************************************************************************/
 
-#include <AuroraFW/TLib/Memory.h>
+#include <AuroraFW/STDL/Memory.h>
 
 #ifndef _STRING_H
 #ifdef AFW_TARGET_CXX

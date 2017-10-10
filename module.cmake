@@ -14,22 +14,23 @@
 # ensure the GNU Lesser General Public License version 3 requirements
 # will be met: https://www.gnu.org/licenses/lgpl-3.0.html.
 
-message(STATUS "Loading tlib module...")
+message(STATUS "Loading stdl module...")
 
 if (NOT CONFIGURED_ONCE)
-	set(AURORAFW_MODULE_TLIB_SOURCE_DIR ${AURORAFW_MODULE_TLIB_DIR}/src)
+	set(AURORAFW_MODULE_STDL_SOURCE_DIR ${AURORAFW_MODULE_STDL_DIR}/src)
 endif()
 
-include_directories(${AURORAFW_MODULE_TLIB_DIR}/include)
-file(GLOB AURORAFW_MODULE_TLIB_HEADERS_TLIB ${AURORAFW_MODULE_CORE_DIR}/include/AuroraFW/TLib/*.h)
-file(GLOB AURORAFW_MODULE_TLIB_HEADERS_TLIB_TARGET ${AURORAFW_MODULE_CORE_DIR}/include/AuroraFW/TLib/Target/*.h)
+include_directories(${AURORAFW_MODULE_STDL_DIR}/include)
+file(GLOB_RECURSE AURORAFW_MODULE_STDL_HEADERS ${AURORAFW_MODULE_STDL_DIR}/include/*.*)
+file(GLOB AURORAFW_MODULE_STDL_SOURCE ${AURORAFW_MODULE_STDL_SOURCE_DIR}/*.*)
 
-add_library (aurorafw-tlib SHARED ${AURORAFW_MODULE_TLIB_SOURCE_DIR}/CircularShift.cpp
-                            	${AURORAFW_MODULE_TLIB_SOURCE_DIR}/Endian.cpp
-                                ${AURORAFW_MODULE_TLIB_SOURCE_DIR}/String.cpp
-								${AURORAFW_MODULE_TLIB_SOURCE_DIR}/Memory.c)
+add_library (aurorafw-stdl SHARED ${AURORAFW_MODULE_STDL_SOURCE})
+if(AURORA_PCH)
+	add_precompiled_header(aurorafw-stdl "${AURORAFW_MODULE_STDL_HEADERS}")
+endif()
 
-#Temporary Link
-target_link_libraries(aurorafw-tlib aurorafw-io)
+set_target_properties(aurorafw-stdl PROPERTIES COMPILE_FLAGS "-static-libstdc++ -static-libgcc")
+set_target_properties(aurorafw-stdl PROPERTIES OUTPUT_NAME aurorafw-stdl)
 
-set_target_properties(aurorafw-tlib PROPERTIES OUTPUT_NAME aurorafw-tlib)
+install(TARGETS aurorafw-stdl DESTINATION lib)
+install(FILES ${AURORAFW_MODULE_CORE_HEADERS_CORE} DESTINATION include/Aurora/Core)

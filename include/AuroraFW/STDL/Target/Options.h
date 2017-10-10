@@ -16,37 +16,13 @@
 ** will be met: https://www.gnu.org/licenses/lgpl-3.0.html.
 ****************************************************************************/
 
-#include <AuroraFW/STDL/CircularShift.h>
+//TODO: Need to be documented
 
-#ifdef AFW_TARGET_CXX
-	namespace AuroraFW
-	{
-#endif
-	inline uint32_t rotl32 (const uint32_t& value, unsigned int count)
-	{
-		const unsigned int mask = (CHAR_BIT*sizeof(value)-1);
-		count &= mask;
-		return (value<<count) | (value>>( (-count) & mask ));
-	}
-	inline uint32_t rotr32 (const uint32_t& value, unsigned int count)
-	{
-		const unsigned int mask = (CHAR_BIT*sizeof(value)-1);
-		count &= mask;
-		return (value>>count) | (value<<( (-count) & mask ));
-	}
-	inline uint64_t rotl64 (const uint64_t& value, unsigned int count)
-	{
-		const unsigned int mask = (CHAR_BIT*sizeof(value)-1);
-		count &= mask;
-		return (value>>count) | (value<<( (-count) & mask ));
-	}
-	inline uint64_t rotr64 (const uint64_t& value, unsigned int count)
-	{
-		const unsigned int mask = (CHAR_BIT*sizeof(value)-1);
-		count &= mask;
-		return (value>>count) | (value<<( (-count) & mask ));
-	}
+#ifndef AURORAFW_STDL_TARGET_OPTIONS_H
+#define AURORAFW_STDL_TARGET_OPTIONS_H
 
-#ifdef AFW_TARGET_CXX
-	}
+#ifdef __ELF__
+	#define AFW_TARGET_ELF
 #endif
+
+#endif // AURORAFW_STDL_TARGET_OPTIONS_H

@@ -16,37 +16,18 @@
 ** will be met: https://www.gnu.org/licenses/lgpl-3.0.html.
 ****************************************************************************/
 
-#include <AuroraFW/STDL/CircularShift.h>
+//TODO: Need to be documented and structured !
 
-#ifdef AFW_TARGET_CXX
-	namespace AuroraFW
-	{
-#endif
-	inline uint32_t rotl32 (const uint32_t& value, unsigned int count)
-	{
-		const unsigned int mask = (CHAR_BIT*sizeof(value)-1);
-		count &= mask;
-		return (value<<count) | (value>>( (-count) & mask ));
-	}
-	inline uint32_t rotr32 (const uint32_t& value, unsigned int count)
-	{
-		const unsigned int mask = (CHAR_BIT*sizeof(value)-1);
-		count &= mask;
-		return (value>>count) | (value<<( (-count) & mask ));
-	}
-	inline uint64_t rotl64 (const uint64_t& value, unsigned int count)
-	{
-		const unsigned int mask = (CHAR_BIT*sizeof(value)-1);
-		count &= mask;
-		return (value>>count) | (value<<( (-count) & mask ));
-	}
-	inline uint64_t rotr64 (const uint64_t& value, unsigned int count)
-	{
-		const unsigned int mask = (CHAR_BIT*sizeof(value)-1);
-		count &= mask;
-		return (value>>count) | (value<<( (-count) & mask ));
-	}
+#ifndef AURORAFW_STDL_TARGET_WORDSIZE_H
+#define AURORAFW_STDL_TARGET_WORDSIZE_H
 
-#ifdef AFW_TARGET_CXX
-	}
+#include <AuroraFW/STDL/Target/DataModel.h>
+#include <AuroraFW/STDL/Target/Architecture.h>
+
+#if defined(AFW_TARGET_CPUARCH_86_64) && !defined(AFW_TARGET_DATAMODEL_ILP32)
+	#define AFW_TARGET_WORDSIZE 64
+#else
+	#define AFW_TARGET_WORDSIZE 32
 #endif
+
+#endif /// AURORAFW_STDL_TARGET_WORDSIZE_H

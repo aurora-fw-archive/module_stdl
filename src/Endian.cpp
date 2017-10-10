@@ -16,8 +16,8 @@
 ** will be met: https://www.gnu.org/licenses/lgpl-3.0.html.
 ****************************************************************************/
 
-#include <AuroraFW/TLib/Endian.h>
-#include <AuroraFW/TLib/Type.h>
+#include <AuroraFW/STDL/Endian.h>
+#include <AuroraFW/STDL/Type.h>
 
 #ifdef AFW_TARGET_CXX
 	namespace AuroraFW
@@ -29,21 +29,21 @@
 		*/
 
 		//16-bits
-		inline ArUInt16_t Endian::HtoBE16(const ArUInt16_t& h) { return htobe16(h); }
-		inline ArUInt16_t Endian::HtoLE16(const ArUInt16_t& h) { return htole16(h); }
-		inline ArUInt16_t Endian::BE16toH(const ArUInt16_t& be) { return be16toh(be); }
-		inline ArUInt16_t Endian::LE16toH(const ArUInt16_t& le) { return le16toh(le); }
+		inline afwuint16_t HtoBE16(const afwuint16_t& h) { return htobe16(h); }
+		inline afwuint16_t HtoLE16(const afwuint16_t& h) { return htole16(h); }
+		inline afwuint16_t BE16toH(const afwuint16_t& be) { return be16toh(be); }
+		inline afwuint16_t LE16toH(const afwuint16_t& le) { return le16toh(le); }
 
 		//32-bits
-		inline ArUInt32_t Endian::HtoBE32(const ArUInt32_t& h) { return htobe32(h); }
-		inline ArUInt32_t Endian::HtoLE32(const ArUInt32_t& h) { return htole32(h); }
-		inline ArUInt32_t Endian::BE32toH(const ArUInt32_t& be) { return be32toh(be); }
-		inline ArUInt32_t Endian::LE32toH(const ArUInt32_t& le) { return le32toh(le); }
+		inline afwuint32_t HtoBE32(const afwuint32_t& h) { return htobe32(h); }
+		inline afwuint32_t HtoLE32(const afwuint32_t& h) { return htole32(h); }
+		inline afwuint32_t BE32toH(const afwuint32_t& be) { return be32toh(be); }
+		inline afwuint32_t LE32toH(const afwuint32_t& le) { return le32toh(le); }
 
 		//64-bits
-		inline ArUInt64_t Endian::HtoBE64(const ArUInt64_t& h) { return htobe64(h); }
-		inline ArUInt64_t Endian::HtoLE64(const ArUInt64_t& h) { return htole64(h); }
-		inline ArUInt64_t Endian::BE64toH(const ArUInt64_t& be) { return be64toh(be); }
-		inline ArUInt64_t Endian::LE64toH(const ArUInt64_t& le) { return le64toh(le); }
+		inline afwuint64_t HtoBE64(const afwuint64_t& h) { return htobe64(h); }
+		inline afwuint64_t HtoLE64(const afwuint64_t& h) { return htole64(h); }
+		inline afwuint64_t BE64toH(const afwuint64_t& be) { return be64toh(be); }
+		inline afwuint64_t LE64toH(const afwuint64_t& le) { return le64toh(le); }
 	}
 #endif

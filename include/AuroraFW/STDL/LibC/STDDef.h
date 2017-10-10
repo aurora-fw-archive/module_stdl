@@ -16,37 +16,48 @@
 ** will be met: https://www.gnu.org/licenses/lgpl-3.0.html.
 ****************************************************************************/
 
-#include <AuroraFW/STDL/CircularShift.h>
+#ifndef AURORAFW_STDL_LIBC_STDDEF_H
+#define AURORAFW_STDL_LIBC_STDDEF_H
+
+#include <AuroraFW/STDL/Global.h>
+#include <AuroraFW/STDL/LibC/_STDDef.h>
+
+#if (AFW_STDLIB_CC == 0) || !defined(AURORAFW_STDL_LIBC__STDDEF_H)
+
+#include <AuroraFW/STDL/Target/Compiler.h>
+#include <AuroraFW/STDL/Target/Language.h>
+#include <AuroraFW/STDL/Target/DataModel.h>
+
+#undef NULL
+#if defined(AFW_TARGET_COMPILER_GNU_GXX) || (!defined(AFW_TARGET_COMPILER_MINGW) && !defined(AFW_TARGET_COMPILER_MICROSOFT))
+	#define NULL __null
+#else
+	#ifdef AFW_TARGET_CXX
+		#ifdef AFW_TARGET_CXX_11
+			#define NULL nullptr
+		#else
+			#define NULL 0
+		#endif
+	#else
+		#define NULL ((void *)0)
+	#endif
+#endif
+
+#ifdef AFW_TARGET_DATAMODEL_LP64
+	typedef unsigned long long int size_t;
+#else
+	typedef unsigned long int size_t;
+#endif
+
+#endif
 
 #ifdef AFW_TARGET_CXX
-	namespace AuroraFW
-	{
+	namespace afwstd {	
+		enum class byte : unsigned char {};
+	#ifdef AFW_TARGET_CXX_11
+		typedef decltype(nullptr) nullptr_t;
+	#endif
+	}
 #endif
-	inline uint32_t rotl32 (const uint32_t& value, unsigned int count)
-	{
-		const unsigned int mask = (CHAR_BIT*sizeof(value)-1);
-		count &= mask;
-		return (value<<count) | (value>>( (-count) & mask ));
-	}
-	inline uint32_t rotr32 (const uint32_t& value, unsigned int count)
-	{
-		const unsigned int mask = (CHAR_BIT*sizeof(value)-1);
-		count &= mask;
-		return (value>>count) | (value<<( (-count) & mask ));
-	}
-	inline uint64_t rotl64 (const uint64_t& value, unsigned int count)
-	{
-		const unsigned int mask = (CHAR_BIT*sizeof(value)-1);
-		count &= mask;
-		return (value>>count) | (value<<( (-count) & mask ));
-	}
-	inline uint64_t rotr64 (const uint64_t& value, unsigned int count)
-	{
-		const unsigned int mask = (CHAR_BIT*sizeof(value)-1);
-		count &= mask;
-		return (value>>count) | (value<<( (-count) & mask ));
-	}
 
-#ifdef AFW_TARGET_CXX
-	}
-#endif
+#endif // AURORAFW_STDL_LIBC_STDDEF_H

@@ -16,37 +16,21 @@
 ** will be met: https://www.gnu.org/licenses/lgpl-3.0.html.
 ****************************************************************************/
 
-#include <AuroraFW/STDL/CircularShift.h>
-
-#ifdef AFW_TARGET_CXX
-	namespace AuroraFW
-	{
-#endif
-	inline uint32_t rotl32 (const uint32_t& value, unsigned int count)
-	{
-		const unsigned int mask = (CHAR_BIT*sizeof(value)-1);
-		count &= mask;
-		return (value<<count) | (value>>( (-count) & mask ));
-	}
-	inline uint32_t rotr32 (const uint32_t& value, unsigned int count)
-	{
-		const unsigned int mask = (CHAR_BIT*sizeof(value)-1);
-		count &= mask;
-		return (value>>count) | (value<<( (-count) & mask ));
-	}
-	inline uint64_t rotl64 (const uint64_t& value, unsigned int count)
-	{
-		const unsigned int mask = (CHAR_BIT*sizeof(value)-1);
-		count &= mask;
-		return (value>>count) | (value<<( (-count) & mask ));
-	}
-	inline uint64_t rotr64 (const uint64_t& value, unsigned int count)
-	{
-		const unsigned int mask = (CHAR_BIT*sizeof(value)-1);
-		count &= mask;
-		return (value>>count) | (value<<( (-count) & mask ));
-	}
-
-#ifdef AFW_TARGET_CXX
-	}
+#include <AuroraFW/STDL/Target/Language.h>
+#include <AuroraFW/STDL/Type.h>
+#ifndef _STRING_H
+	#ifdef AFW_TARGET_CXX
+		namespace afw {
+			extern "C" {
+	#endif
+				void *memcpy(void *dst, const void *src, size_t n);
+				void *memmove(void *dst, const void *src, size_t n);
+				int memcmp(const void *cs, const void *ct, size_t n);
+				void *memset(void *s, const int c, size_t n);
+	#ifdef AFW_TARGET_CXX
+			}
+		}
+	#endif
+#else
+#include <AuroraFW/STDL/LibC/String.h>
 #endif

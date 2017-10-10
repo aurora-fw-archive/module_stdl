@@ -16,37 +16,22 @@
 ** will be met: https://www.gnu.org/licenses/lgpl-3.0.html.
 ****************************************************************************/
 
-#include <AuroraFW/STDL/CircularShift.h>
+#ifndef AURORAFW_STDL_LIBC__STDINT_H
+#define AURORAFW_STDL_LIBC__STDINT_H
 
-#ifdef AFW_TARGET_CXX
-	namespace AuroraFW
-	{
-#endif
-	inline uint32_t rotl32 (const uint32_t& value, unsigned int count)
-	{
-		const unsigned int mask = (CHAR_BIT*sizeof(value)-1);
-		count &= mask;
-		return (value<<count) | (value>>( (-count) & mask ));
-	}
-	inline uint32_t rotr32 (const uint32_t& value, unsigned int count)
-	{
-		const unsigned int mask = (CHAR_BIT*sizeof(value)-1);
-		count &= mask;
-		return (value>>count) | (value<<( (-count) & mask ));
-	}
-	inline uint64_t rotl64 (const uint64_t& value, unsigned int count)
-	{
-		const unsigned int mask = (CHAR_BIT*sizeof(value)-1);
-		count &= mask;
-		return (value>>count) | (value<<( (-count) & mask ));
-	}
-	inline uint64_t rotr64 (const uint64_t& value, unsigned int count)
-	{
-		const unsigned int mask = (CHAR_BIT*sizeof(value)-1);
-		count &= mask;
-		return (value>>count) | (value<<( (-count) & mask ));
-	}
+#include <AuroraFW/STDL/Standard.h>
+#include <AuroraFW/STDL/Target/Language.h>
 
-#ifdef AFW_TARGET_CXX
-	}
+#if !defined(AURORAFW_STDL_LIBC_STDINT_H) && !defined(AFW__PHC)
+	#error "Don't include this header directly, include AuroraFW/STDL/LibC/STDInt.h instead"
 #endif
+
+#if AFW_STDLIB_CC == 1
+	#ifdef AFW_TARGET_CXX
+		#include <cstdint>
+	#elif defined(AFW_TARGET_CC)
+		#include <stdint.h>
+	#endif
+#endif // AFW_STDLIB_CC
+
+#endif // AURORAFW_STDL_STANDARD_STDINT_H

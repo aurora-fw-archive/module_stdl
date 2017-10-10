@@ -16,37 +16,25 @@
 ** will be met: https://www.gnu.org/licenses/lgpl-3.0.html.
 ****************************************************************************/
 
-#include <AuroraFW/STDL/CircularShift.h>
+//TODO: Need to be documented
 
-#ifdef AFW_TARGET_CXX
-	namespace AuroraFW
-	{
-#endif
-	inline uint32_t rotl32 (const uint32_t& value, unsigned int count)
-	{
-		const unsigned int mask = (CHAR_BIT*sizeof(value)-1);
-		count &= mask;
-		return (value<<count) | (value>>( (-count) & mask ));
-	}
-	inline uint32_t rotr32 (const uint32_t& value, unsigned int count)
-	{
-		const unsigned int mask = (CHAR_BIT*sizeof(value)-1);
-		count &= mask;
-		return (value>>count) | (value<<( (-count) & mask ));
-	}
-	inline uint64_t rotl64 (const uint64_t& value, unsigned int count)
-	{
-		const unsigned int mask = (CHAR_BIT*sizeof(value)-1);
-		count &= mask;
-		return (value>>count) | (value<<( (-count) & mask ));
-	}
-	inline uint64_t rotr64 (const uint64_t& value, unsigned int count)
-	{
-		const unsigned int mask = (CHAR_BIT*sizeof(value)-1);
-		count &= mask;
-		return (value>>count) | (value<<( (-count) & mask ));
-	}
+#ifndef AURORAFW_STDL_TARGET_KERNEL_H
+#define AURORAFW_STDL_TARGET_KERNEL_H
 
-#ifdef AFW_TARGET_CXX
-	}
+#include <AuroraFW/STDL/Target/Platform.h>
+
+#if defined(__linux__) || defined(__linux) || defined(linux)
+    #define AFW_TARGET_KERNEL_LINUX
+#elif defined(AFW_TARGET_PLATFORM_WINDOWS)
+    #define AFW_TARGET_KERNEL_NT
+#elif defined(__FreeBSD__) || defined(__FreeBSD_kernel__)
+    #define AFW_TARGET_KERNEL_FREEBSD
+#elif defined(__OpenBSD__)
+    #define AFW_TARGET_KERNEL_OPENBSD
+#elif defined(__NetBSD__)
+    #define AFW_TARGET_KERNEL_NETBSD
+#elif defined(__DragonFly__)
+    #define AFW_TARGET_KERNEL_DRAGONFLY
 #endif
+
+#endif // AURORAFW_STDL_TARGET_KERNEL_H

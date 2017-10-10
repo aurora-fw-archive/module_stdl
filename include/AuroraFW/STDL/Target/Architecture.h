@@ -16,37 +16,42 @@
 ** will be met: https://www.gnu.org/licenses/lgpl-3.0.html.
 ****************************************************************************/
 
-#include <AuroraFW/STDL/CircularShift.h>
+/** @file AuroraFW/STDL/Target/Architecture.h
+ * Detect target architecture
+ * @todo Need to be documented
+ * @todo Change x86 arch definitions according to microsoft compiler
+ */
 
-#ifdef AFW_TARGET_CXX
-	namespace AuroraFW
-	{
-#endif
-	inline uint32_t rotl32 (const uint32_t& value, unsigned int count)
-	{
-		const unsigned int mask = (CHAR_BIT*sizeof(value)-1);
-		count &= mask;
-		return (value<<count) | (value>>( (-count) & mask ));
-	}
-	inline uint32_t rotr32 (const uint32_t& value, unsigned int count)
-	{
-		const unsigned int mask = (CHAR_BIT*sizeof(value)-1);
-		count &= mask;
-		return (value>>count) | (value<<( (-count) & mask ));
-	}
-	inline uint64_t rotl64 (const uint64_t& value, unsigned int count)
-	{
-		const unsigned int mask = (CHAR_BIT*sizeof(value)-1);
-		count &= mask;
-		return (value>>count) | (value<<( (-count) & mask ));
-	}
-	inline uint64_t rotr64 (const uint64_t& value, unsigned int count)
-	{
-		const unsigned int mask = (CHAR_BIT*sizeof(value)-1);
-		count &= mask;
-		return (value>>count) | (value<<( (-count) & mask ));
-	}
+#ifndef AURORAFW_STDL_TARGET_ARCHITECTURE_H
+#define AURORAFW_STDL_TARGET_ARCHITECTURE_H
 
-#ifdef AFW_TARGET_CXX
-	}
+#if defined(__powerpc__) || defined(__ppc__) || defined(__PPC__)
+	#define AFW_TARGET_ARCH_POWERPC
+	#if defined(__powerpc64__) || defined(__ppc64__) || defined(__PPC64__) || defined(__64BIT__) || defined(_LP64) || defined(__LP64__)
+		#define AFW_TARGET_ARCH_POWERPC_64
+	#else
+		#define AFW_TARGET_ARCH_POWERPC_32
+	#endif
 #endif
+
+#if defined(__x86_64__) || defined(_M_X64)
+	#define AFW_TARGET_ARCH_X86
+	#define AFW_TARGET_ARCH_X86_64
+#elif defined(__i386) || defined(_M_IX86)
+	#define AFW_TARGET_ARCH_X86
+	#define AFW_TARGET_ARCH_X86_32
+#endif
+
+#if defined(__arm__)
+	#define AFW_TARGET_ARCH_ARM
+#endif
+
+#if defined(__ia64) || defined(__itanium__) || defined(_M_IA64)
+	#define AFW_TARGET_ARCH_ITANIUM
+#endif
+
+#ifdef __sparc
+	#define AFW_TARGET_ARCH_SPARC
+#endif
+
+#endif // AURORAFW_STDL_TARGET_ARCHITECTURE_H

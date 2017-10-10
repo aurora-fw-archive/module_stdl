@@ -16,37 +16,18 @@
 ** will be met: https://www.gnu.org/licenses/lgpl-3.0.html.
 ****************************************************************************/
 
-#include <AuroraFW/STDL/CircularShift.h>
+#ifndef AURORAFW_STDL_LIBC_ASSERT_H
+#define AURORAFW_STDL_LIBC_ASSERT_H
 
-#ifdef AFW_TARGET_CXX
-	namespace AuroraFW
-	{
-#endif
-	inline uint32_t rotl32 (const uint32_t& value, unsigned int count)
-	{
-		const unsigned int mask = (CHAR_BIT*sizeof(value)-1);
-		count &= mask;
-		return (value<<count) | (value>>( (-count) & mask ));
-	}
-	inline uint32_t rotr32 (const uint32_t& value, unsigned int count)
-	{
-		const unsigned int mask = (CHAR_BIT*sizeof(value)-1);
-		count &= mask;
-		return (value>>count) | (value<<( (-count) & mask ));
-	}
-	inline uint64_t rotl64 (const uint64_t& value, unsigned int count)
-	{
-		const unsigned int mask = (CHAR_BIT*sizeof(value)-1);
-		count &= mask;
-		return (value>>count) | (value<<( (-count) & mask ));
-	}
-	inline uint64_t rotr64 (const uint64_t& value, unsigned int count)
-	{
-		const unsigned int mask = (CHAR_BIT*sizeof(value)-1);
-		count &= mask;
-		return (value>>count) | (value<<( (-count) & mask ));
-	}
+#include <AuroraFW/STDL/Global.h>
+#include <AuroraFW/STDL/LibC/_Assert.h>
 
-#ifdef AFW_TARGET_CXX
-	}
+#if (AFW_STDLIB_CC == 0) || !defined(AURORAFW_STDL_LIBC__ASSERT_H)
+
+#ifdef NDEBUG
+	#define assert(ignore)((void) 0)
 #endif
+
+#endif
+
+#endif // AURORAFW_STDL_LIBC_ASSERT_H

@@ -16,37 +16,15 @@
 ** will be met: https://www.gnu.org/licenses/lgpl-3.0.html.
 ****************************************************************************/
 
-#include <AuroraFW/STDL/CircularShift.h>
+#ifndef AURORAFW_STDL_STANDARD_MATH_H
+#define AURORAFW_STDL_STANDARD_MATH_H
 
-#ifdef AFW_TARGET_CXX
-	namespace AuroraFW
-	{
-#endif
-	inline uint32_t rotl32 (const uint32_t& value, unsigned int count)
-	{
-		const unsigned int mask = (CHAR_BIT*sizeof(value)-1);
-		count &= mask;
-		return (value<<count) | (value>>( (-count) & mask ));
-	}
-	inline uint32_t rotr32 (const uint32_t& value, unsigned int count)
-	{
-		const unsigned int mask = (CHAR_BIT*sizeof(value)-1);
-		count &= mask;
-		return (value>>count) | (value<<( (-count) & mask ));
-	}
-	inline uint64_t rotl64 (const uint64_t& value, unsigned int count)
-	{
-		const unsigned int mask = (CHAR_BIT*sizeof(value)-1);
-		count &= mask;
-		return (value>>count) | (value<<( (-count) & mask ));
-	}
-	inline uint64_t rotr64 (const uint64_t& value, unsigned int count)
-	{
-		const unsigned int mask = (CHAR_BIT*sizeof(value)-1);
-		count &= mask;
-		return (value>>count) | (value<<( (-count) & mask ));
-	}
+//#include <AuroraFW/STDL/Target/Compiler.h>
+//#include <AuroraFW/STDL/Target/Architecture.h>
+//#include <AuroraFW/STDL/Target/CCPlusPlus.h>
 
-#ifdef AFW_TARGET_CXX
-	}
+#ifndef AURORAFW_STDL_MATH_STRICT_INCLUDE
+	#include <AuroraFW/STDL/LibC/Math.h>
 #endif
+
+#endif // AURORAFW_STDL_STANDARD_MATH_H

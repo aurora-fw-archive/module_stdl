@@ -16,9 +16,9 @@
 ** will be met: https://www.gnu.org/licenses/lgpl-3.0.html.
 ****************************************************************************/
 
-#include <AuroraFW/TLib/Target/CCPlusPlus.h>
-#include <AuroraFW/TLib/String.h>
-#include <AuroraFW/TLib/_Assert.h>
+#include <AuroraFW/STDL/Target/Language.h>
+#include <AuroraFW/STDL/String.h>
+#include <AuroraFW/STDL/LibC/Assert.h>
 
 #ifdef AFW_TARGET_CXX
 	namespace AuroraFW

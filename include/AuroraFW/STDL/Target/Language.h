@@ -16,37 +16,36 @@
 ** will be met: https://www.gnu.org/licenses/lgpl-3.0.html.
 ****************************************************************************/
 
-#include <AuroraFW/STDL/CircularShift.h>
+//TODO: Need to be documented and structured
 
-#ifdef AFW_TARGET_CXX
-	namespace AuroraFW
-	{
-#endif
-	inline uint32_t rotl32 (const uint32_t& value, unsigned int count)
-	{
-		const unsigned int mask = (CHAR_BIT*sizeof(value)-1);
-		count &= mask;
-		return (value<<count) | (value>>( (-count) & mask ));
-	}
-	inline uint32_t rotr32 (const uint32_t& value, unsigned int count)
-	{
-		const unsigned int mask = (CHAR_BIT*sizeof(value)-1);
-		count &= mask;
-		return (value>>count) | (value<<( (-count) & mask ));
-	}
-	inline uint64_t rotl64 (const uint64_t& value, unsigned int count)
-	{
-		const unsigned int mask = (CHAR_BIT*sizeof(value)-1);
-		count &= mask;
-		return (value>>count) | (value<<( (-count) & mask ));
-	}
-	inline uint64_t rotr64 (const uint64_t& value, unsigned int count)
-	{
-		const unsigned int mask = (CHAR_BIT*sizeof(value)-1);
-		count &= mask;
-		return (value>>count) | (value<<( (-count) & mask ));
-	}
+#ifndef AURORAFW_STDL_TARGET_LANGUAGE_H
+#define AURORAFW_STDL_TARGET_LANGUAGE_H
 
-#ifdef AFW_TARGET_CXX
-	}
+#include <AuroraFW/STDL/Target/Compiler.h>
+
+#undef AFW_TARGET_CC
+#undef AFW_TARGET_CXX
+
+#ifdef __cplusplus
+	#define AFW_TARGET_CXX __cplusplus
+	#if AFW_TARGET_CXX >= 199711L
+		#define AFW_TARGET_CXX_98
+	#endif
+	#if AFW_TARGET_CXX >= 201103L
+		#define AFW_TARGET_CXX_11
+	#endif
+	#if AFW_TARGET_CXX >= 201402L
+		#define AFW_TARGET_CXX_14
+	#endif
+	#if AFW_TARGET_CXX >= 201703L
+		#define AFW_TARGET_CXX_17
+	#endif
+#else
+	#define AFW_TARGET_CC
 #endif
+
+#if __USE_ISOC99
+	#define AFW_TARGET_C99
+#endif
+
+#endif // AURORAFW_STDL_TARGET_LANGUAGE_H
