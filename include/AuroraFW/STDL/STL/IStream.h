@@ -23,7 +23,6 @@
 #include <AuroraFW/STDL/STL/_IStream.h>
 
 #if (AFW_STDLIB_CC == 0) || !defined(AURORAFW_STDL_STL__ISTREAM_H)
-
 #endif
 
 #endif // AURORAFW_STDL_STL_ISTREAM_H

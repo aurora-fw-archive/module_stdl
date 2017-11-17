@@ -23,7 +23,6 @@
 #include <AuroraFW/STDL/STL/_String.h>
 
 #if (AFW_STDLIB_CC == 0) || !defined(AURORAFW_STDL_STL__STRING_H)
-
 #endif
 
 #endif // AURORAFW_STDL_STL_STRING_H

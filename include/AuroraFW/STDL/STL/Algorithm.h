@@ -23,7 +23,6 @@
 #include <AuroraFW/STDL/STL/_Algorithm.h>
 
 #if (AFW_STDLIB_CC == 0) || !defined(AURORAFW_STDL_STL__ALGORITHM_H)
-
 #endif
 
 #endif // AURORAFW_STDL_STL_ALGORITHM_H

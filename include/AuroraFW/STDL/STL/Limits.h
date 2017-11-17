@@ -23,7 +23,6 @@
 #include <AuroraFW/STDL/STL/_Limits.h>
 
 #if (AFW_STDLIB_CC == 0) || !defined(AURORAFW_STDL_STL__LIMITS_H)
-
 #endif
 
 #endif // AURORAFW_STDL_STL_LIMITS_H
