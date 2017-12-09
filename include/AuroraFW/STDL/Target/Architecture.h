@@ -123,7 +123,7 @@
 	#if AFW_TARGET_ARCH_ARM >= 2
 		#define AFW_TARGET_ARCH_ARM_V2
 	#else
-		#warning "Unknown ARM architecture"
+		#warning "Unknown ARM architecture version"
 	#endif
 
 /*
