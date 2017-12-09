@@ -18,21 +18,20 @@
 **
 ** NOTE: All products, services or anything associated to Intel is a
 ** trademark or registered trademarks of Intel Corporation or its
-** subsidiaries in the U.S. and/or other countries. Other names and brands
-** may be claimed as the property of others. More info:
-** https://www.intel.com/content/www/us/en/legal/trademarks.html .
+** subsidiaries in the U.S. and/or other countries. More info:
+** https://www.intel.com/content/www/us/en/legal/trademarks.html. Other
+** names and brands may be claimed as the property of others.
 ****************************************************************************/
 
 /** @file AuroraFW/STDL/Target/Architecture.h
  * Detect target architecture
  * @note This file use the following syntax: AFW_TARGET_ARCH_FAMILY_VARIANT. Can
-	also use revision instead of variant, e.g. ARM family processors:
-	AFW_TARGET_ARCH_FAMILY_REVISION.
+ *	also use revision instead of variant, e.g. ARM family processors:
+ *	AFW_TARGET_ARCH_FAMILY_REVISION.
  *
  * @author Luís “ljmf00” Ferreira <contact@lsferreira.net>
- * 
+ *
  * @todo Need to be documented
- * @todo Add https://sourceforge.net/p/predef/wiki/Architectures/
  */
 
 #ifndef AURORAFW_STDL_TARGET_ARCHITECTURE_H
@@ -56,7 +55,9 @@
 	#endif
 
 //Define x86_64 processor architecture detection
-#elif defined(__x86_64) || defined(__x86_64__) || defined(__amd64) || defined(_M_X64)
+#elif defined(__x86_64) || defined(__x86_64__) || defined(__amd64) || defined(__amd64__) || defined(_M_X64) \
+	|| defined(_M_AMD64)
+
 	//Define i686 as x86 processor version
 	#define AFW_TARGET_ARCH_X86 6
 	//Define x86_64 processor wordsize
@@ -82,12 +83,20 @@
 		#define AFW_TARGET_ARCH_ARM 8
 	#elif defined(__ARM_ARCH_7__) || defined(__ARM_ARCH_7A__) || defined(__ARM_ARCH_7R__) \
 		|| defined(__ARM_ARCH_7M__) || defined(__ARM_ARCH_7S__) || defined(_ARM_ARCH_7) || defined(__CORE_CORTEXA__)
+
 		#define AFW_TARGET_ARCH_ARM 7
 	#elif defined(__ARM_ARCH_6__) || defined(__ARM_ARCH_6J__) || defined(__ARM_ARCH_6T2__) || defined(__ARM_ARCH_6Z__) \
 		|| defined(__ARM_ARCH_6K__) || defined(__ARM_ARCH_6ZK__) || defined(__ARM_ARCH_6M__)
+
 		#define AFW_TARGET_ARCH_ARM 6
 	#elif defined(__ARM_ARCH_5TEJ__) || defined(__ARM_ARCH_5TE__)
 		#define AFW_TARGET_ARCH_ARM 5
+	#elif defined(__ARM_ARCH_4T__) || defined(__TARGET_ARM_4T)
+		#define AFW_TARGET_ARCH_ARM 4
+	#elif defined(__ARM_ARCH_3M__) || defined(__ARM_ARCH_3__)
+		#define AFW_TARGET_ARCH_ARM 3
+	#elif defined(__ARM_ARCH_2__)
+		#define AFW_TARGET_ARCH_ARM 2
 	#else
 		#define AFW_TARGET_ARCH_ARM 0
 	#endif
@@ -104,8 +113,17 @@
 	#endif
 	#if AFW_TARGET_ARCH_ARM >= 5
 		#define AFW_TARGET_ARCH_ARM_V5
+	#endif
+	#if AFW_TARGET_ARCH_ARM >= 4
+		#define AFW_TARGET_ARCH_ARM_V4
+	#endif
+	#if AFW_TARGET_ARCH_ARM >= 3
+		#define AFW_TARGET_ARCH_ARM_V3
+	#endif
+	#if AFW_TARGET_ARCH_ARM >= 2
+		#define AFW_TARGET_ARCH_ARM_V2
 	#else
-		#error "Unknown ARM architecture"
+		#warning "Unknown ARM architecture"
 	#endif
 
 /*
@@ -120,16 +138,24 @@
 //Define MIPS processor architecture family
 #elif defined(__mips) || defined(__mips__) || defined(_M_MRX000)
 	#define AFW_TARGET_ARCH_MIPS
-	#if defined(_MIPS_ARCH_MIPS1) || (defined(__mips) && __mips - 0 >= 1)
+	#if defined(_MIPS_ARCH_MIPS1) || (defined(__mips) && __mips - 0 >= 1) || defined(_MIPS_ISA_MIPS1) \
+		|| defined(_R3000)
+
 		#define AFW_TARGET_ARCH_MIPS_1
 	#endif
-	#if defined(_MIPS_ARCH_MIPS2) || (defined(__mips) && __mips - 0 >= 2)
+	#if defined(_MIPS_ARCH_MIPS2) || (defined(__mips) && __mips - 0 >= 2) || defined(_MIPS_ISA_MIPS2) \
+		|| defined(__MIPS_ISA2__)
+
 		#define AFW_TARGET_ARCH_MIPS_2
 	#endif
-	#if defined(_MIPS_ARCH_MIPS3) || (defined(__mips) && __mips - 0 >= 3)
+	#if defined(_MIPS_ARCH_MIPS3) || (defined(__mips) && __mips - 0 >= 3) || defined(_MIPS_ISA_MIPS3) \
+		|| defined(__MIPS_ISA3__)
+
 		#define AFW_TARGET_ARCH_MIPS_3
 	#endif
-	#if defined(_MIPS_ARCH_MIPS4) || (defined(__mips) && __mips - 0 >= 4)
+	#if defined(_MIPS_ARCH_MIPS4) || (defined(__mips) && __mips - 0 >= 4) || defined(_MIPS_ISA_MIPS4) \
+		|| defined(__MIPS_ISA4__)
+
 		#define AFW_TARGET_ARCH_MIPS_4
 	#endif
 	#if defined(_MIPS_ARCH_MIPS5) || (defined(__mips) && __mips - 0 >= 5)
@@ -144,9 +170,25 @@
 
 //Define PowerPC processor architecture family
 #elif defined(__ppc__) || defined(__ppc) || defined(__powerpc__) || defined(_ARCH_COM) || defined(_ARCH_PWR) \
-	|| defined(_ARCH_PPC) || defined(_M_MPPC) || defined(_M_PPC)
+	|| defined(_ARCH_PPC) || defined(_ARCH_PPC64) || defined(_M_MPPC) || defined(_M_PPC) || defined(__ppc64__) \
+	|| defined(__PPC__) || defined(__PPC64_) || defined(__powerpc64__) || defined(__POWERPC__)
 
-	#define AFW_TARGET_ARCH_POWERPC
+	#ifdef _ARCH_440
+		#define AFW_TARGET_ARCH_POWERPC 440
+	#elif _ARCH_450
+		#define AFW_TARGET_ARCH_POWERPC 450
+	#elif (_M_PPC == 601) || defined(__ppc601__) || defined(_ARCH_601)
+		#define AFW_TARGET_ARCH_POWERPC 601
+	#elif (_M_PPC == 603) || defined(__ppc603__) || defined(_ARCH_603)
+		#define AFW_TARGET_ARCH_POWERPC 603
+	#elif (_M_PPC == 604) || defined(__ppc604__) || defined(_ARCH_604)
+		#define AFW_TARGET_ARCH_POWERPC 604
+	#elif (_M_PPC == 620)
+		#define AFW_TARGET_ARCH_POWERPC 620
+	#else
+		#define AFW_TARGET_ARCH_POWERPC
+	#endif
+
 	#if defined(__ppc64__) || defined(__powerpc64__) || defined(__64BIT__)
 		#define AFW_TARGET_ARCH_POWERPC_64
 	#else
@@ -170,6 +212,132 @@
 		#define AFW_TARGET_ARCH_S390_X
 	#endif
 
+/*
+	Define DEC Alpha processor architecture family
+	NOTE: DEC, formally known as Digital Equipment Corporation
+*/
+#elif defined(__alpha__) || defined(__alpha) || defined(_M_ALPHA) || defined(__alpha__ev4__) || defined(__alpha__ev5__) \
+	|| defined(__alpha__ev6__)
+
+	#define AFW_TARGET_ARCH_ALPHA
+	#ifdef __alpha_ev4__
+		#define AFW_TARGET_ARCH_ALPHA_EV4
+	#endif
+	#ifdef __alpha_ev5__
+		#define AFW_TARGET_ARCH_ALPHA_EV5
+	#endif
+	#ifdef __alpha_ev6__
+		#define AFW_TARGET_ARCH_ALPHA_EV6
+	#endif
+#elif defined(__bfin) || defined(__BFIN__)
+	#define AFW_TARGET_ARCH_BLACKFIN
+#elif defined(__convex__) || defined(__convex_c1__) || defined(__convex_c2__) || defined(__convex_c32__) \
+	|| defined(__convex_c34__) || defined(__convex_c38__)
+
+	#define AFW_TARGET_ARCH_CONVEX
+	#ifdef __convex_c1__
+		#define AFW_TARGET_ARCH_CONVEX_C1
+	#endif
+	#ifdef __convex_c2__
+		#define AFW_TARGET_ARCH_CONVEX_C2
+	#endif
+	#ifdef __convex_c32__
+		#define AFW_TARGET_ARCH_CONVEX_C32
+	#endif
+	#ifdef __convex_c34__
+		#define AFW_TARGET_ARCH_CONVEX_C34
+	#endif
+	#ifdef __convex_c38__
+		#define AFW_TARGET_ARCH_CONVEX_C38
+	#endif
+#elif defined(__epiphany__)
+	#define AFW_TARGET_ARCH_EPIPHANY
+#elif defined(__hppa__) || defined(__HPPA__) || defined(__hppa) || defined(_PA_RISC1_0) || defined(_PA_RISC1_1) \
+	|| defined(__HPPA11__) || defined(__PA7100__) || defined(_PA_RISC2_0) || defined(__RISC2_0__) || defined(__HPPA20__) \
+	|| defined(__PA8000__)
+
+	#define AFW_TARGET_ARCH_PA_RISC
+	#ifdef _PA_RISC1_0
+		#define AFW_TARGET_ARCH_PA_RISC_1_0
+	#endif
+	#if defined(_PA_RISC1_1) || defined(__HPPA11__) || defined(__PA7100__)
+		#define AFW_TARGET_ARCH_PA_RISC_1_1
+	#endif
+	#if defined(_PA_RISC2_0) || defined(__RISC2_0__) || defined(__HPPA20__) || defined(__PA8000__)
+		#define AFW_TARGET_ARCH_PA_RISC_2_0
+	#endif
+#elif defined(__m68k__) || defined(M68000) || defined(__MC68K__) || defined(__mc68000__) || defined(__MC68000__) \
+	|| defined(__mc68010__) || defined(__mc68020__) || defined(__MC68020__) || defined(__mc68030__) || defined(__MC68030__) \
+	|| defined(__mc68040__) || defined(__mc68060__)
+
+	#if defined(__mc68000__) || defined(__MC68000__)
+		#define AFW_TARGET_ARCH_MC68K 68000
+	#elif defined(__mc68010__)
+		#define AFW_TARGET_ARCH_MC68K 68010
+	#elif defined(__mc68020__) || defined(__MC68020__)
+		#define AFW_TARGET_ARCH_MC68K 68020
+	#elif defined(__mc68030__) || defined(__MC68030__)
+		#define AFW_TARGET_ARCH_MC68K 68030
+	#elif defined(__mc68040__)
+		#define AFW_TARGET_ARCH_MC68K 68040
+	#elif defined(__mc68060__)
+		#define AFW_TARGET_ARCH_MC68K 68060
+	#else
+		#define AFW_TARGET_ARCH_MC68K
+	#endif
+#elif defined(__sh__)
+	#define AFW_TARGET_ARCH_SUPERH
+	#ifdef __sh1__
+		#define AFW_TARGET_ARCH_SUPERH_1
+	#endif
+	#ifdef __sh2__
+		#define AFW_TARGET_ARCH_SUPERH_2
+	#endif
+	#if defined(__sh3__) || defined(__SH3__)
+		#define AFW_TARGET_ARCH_SUPERH_3
+	#endif
+	#ifdef __SH4__
+		#define AFW_TARGET_ARCH_SUPERH_4
+	#endif
+	#ifdef __SH5__
+		#define AFW_TARGET_ARCH_SUPERH_5
+	#endif
+#elif defined(_TMS320C2XX) || defined(__TMS320C2000__) || defined(_TMS320C5X) || defined(__TMS320C55X__) \
+	|| defined(_TMS320C6X) || defined(__TMS320C6X__)
+
+	#if defined(_TMS320C2XX) || defined(__TMS320C2000__)
+		#define AFW_TARGET_ARCH_TMS320 2000
+	#elif defined(_TMS320C5X) || defined(__TMS320C55X__)
+		#define AFW_TARGET_ARCH_TMS320 5000
+	#elif defined(_TMS320C6X) || defined(__TMS320C6X__)
+		#define AFW_TARGET_ARCH_TMS320 6000
+	#endif
+
+	#if defined(_TMS320C28X)
+		#define AFW_TARGET_ARCH_TMS320_C28XX
+	#elif defined(_TMS320C5XX)
+		#define AFW_TARGET_ARCH_TMS320_C54X
+	#elif defined(__TMS320C55X__)
+		#define AFW_TARGET_ARCH_TMS320_C55X
+	#elif defined(_TMS320C6200)
+		#define AFW_TARGET_ARCH_TMS320_C6200
+	#elif defined(_TMS320C6400)
+		#define AFW_TARGET_ARCH_TMS320_C6400
+	#elif defined(_TMS320C6400_PLUS)
+		#define AFW_TARGET_ARCH_TMS320_C6400_PLUS
+	#elif defined(_TMS320C6600)
+		#define AFW_TARGET_ARCH_TMS320_C6600
+	#elif defined(_TMS320C6700)
+		#define AFW_TARGET_ARCH_TMS320_C6700
+	#elif defined(_TMS320C6700_PLUS)
+		#define AFW_TARGET_ARCH_TMS320_C6700_PLUS
+	#elif defined(_TMS320C6740)
+		#define AFW_TARGET_ARCH_TMS320_C6740
+	#endif
+#elif defined(__TMS470__)
+	#define AFW_TARGET_ARCH_TMS470
+#else
+	#error "Unknown CPU Architecture"
 #endif
 
 #endif // AURORAFW_STDL_TARGET_ARCHITECTURE_H
