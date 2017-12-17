@@ -24,7 +24,7 @@
 #include <AuroraFW/STDL/LibC/Math.h>
 #include <AuroraFW/STDL/LibC/STDDef.h>
 
-#define AFW_DONTCARE 0
+#define AFW_DONTCARE -1
 
 typedef long double real_t;
 typedef unsigned char byte_t;
