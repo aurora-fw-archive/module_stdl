@@ -70,18 +70,42 @@ typedef bool afwbool_t;
 #define AFW_NULL NULL
 
 typedef unsigned int uint_t;
+typedef unsigned int uint;
+
+typedef unsigned short int ushort;
 
 typedef int afwint_t;
 typedef unsigned int afwuint_t;
 
+#ifdef AFW_TARGET_PLATFORM_WINDOWS
+typedef __int8 afwint8_t;
+typedef __int16 afwint16_t;
+typedef __int32 afwint32_t;
+typedef __int64 afwint64_t;
+#else
 typedef int8_t afwint8_t;
 typedef int16_t afwint16_t;
 typedef int32_t afwint32_t;
 typedef int64_t afwint64_t;
+#endif
 
+#ifdef AFW_TARGET_PLATFORM_WINDOWS
+typedef unsigned __int8 afwuint8_t;
+typedef unsigned __int16 afwuint16_t;
+typedef unsigned __int32 afwuint32_t;
+typedef unsigned __int64 afwuint64_t;
+#else
 typedef uint8_t afwuint8_t;
 typedef uint16_t afwuint16_t;
 typedef uint32_t afwuint32_t;
 typedef uint64_t afwuint64_t;
+#endif
+
+#ifdef AFW_TARGET_PLATFORM_WINDOWS
+typedef unsigned __int8 uint8;
+typedef unsigned __int16 uint16;
+typedef unsigned __int32 uint32;
+typedef unsigned __int64 uint64;
+#endif
 
 #endif // AURORAFW_TLIB_TYPE_H
