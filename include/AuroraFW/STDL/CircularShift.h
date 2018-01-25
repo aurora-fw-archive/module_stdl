@@ -21,8 +21,8 @@
 
 #include <AuroraFW/STDL/LibC/STDDef.h>
 #include <AuroraFW/STDL/LibC/STDInt.h>
-#include <AuroraFW/STDL/Target/Language.h>
-#include <AuroraFW/STDL/Target/Wordsize.h>
+#include <AuroraFW/CoreLib/Target/Compiler.h>
+#include <AuroraFW/CoreLib/Target/Architecture.h>
 #include <AuroraFW/STDL/LibC/Limits.h>
 
 #ifdef AFW_TARGET_CXX

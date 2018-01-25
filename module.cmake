@@ -25,12 +25,12 @@ file(GLOB_RECURSE AURORAFW_MODULE_STDL_HEADERS ${AURORAFW_MODULE_STDL_DIR}/inclu
 file(GLOB AURORAFW_MODULE_STDL_SOURCE ${AURORAFW_MODULE_STDL_SOURCE_DIR}/*.*)
 
 add_library (aurorafw-stdl SHARED ${AURORAFW_MODULE_STDL_SOURCE})
+aurora_add_library_target(aurorafw-stdl)
 if(AURORA_PCH)
 	add_precompiled_header(aurorafw-stdl "${AURORAFW_MODULE_STDL_HEADERS}")
 endif()
 
-set_target_properties(aurorafw-stdl PROPERTIES COMPILE_FLAGS "-static-libstdc++ -static-libgcc")
-set_target_properties(aurorafw-stdl PROPERTIES OUTPUT_NAME aurorafw-stdl)
+set_target_properties(aurorafw-stdl PROPERTIES COMPILE_FLAGS "-nodefaultlibs -nostdlib -static-libstdc++ -static-libgcc")
 
 install(TARGETS aurorafw-stdl DESTINATION lib)
 install(FILES ${AURORAFW_MODULE_CORE_HEADERS_CORE} DESTINATION include/Aurora/Core)

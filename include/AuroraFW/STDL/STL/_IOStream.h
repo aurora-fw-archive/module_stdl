@@ -19,10 +19,9 @@
 #ifndef AURORAFW_STDL_STL__IOSTREAM_H
 #define AURORAFW_STDL_STL__IOSTREAM_H
 
-#include <AuroraFW/STDL/Standard.h>
-#include <AuroraFW/STDL/Target/Language.h>
+#include <AuroraFW/CoreLib/Target/Compiler.h>
 
-#if !defined(AURORAFW_STDL_STL_IOSTREAM_H)  && !defined(AFW__PHC)
+#if !defined(AURORAFW_STDL_STL_IOSTREAM_H) && !defined(AFW__PHC)
 	#error "Don't include this header directly, include AuroraFW/STDL/STL/IOStream.h instead"
 #endif
 

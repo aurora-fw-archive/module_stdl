@@ -16,8 +16,8 @@
 ** will be met: https://www.gnu.org/licenses/lgpl-3.0.html.
 ****************************************************************************/
 
-#include <AuroraFW/STDL/Target/Language.h>
-#include <AuroraFW/STDL/Type.h>
+#include <AuroraFW/CoreLib/Target/Compiler.h>
+#include <AuroraFW/CoreLib/Type.h>
 #ifndef _STRING_H
 	#ifdef AFW_TARGET_CXX
 		namespace afw {

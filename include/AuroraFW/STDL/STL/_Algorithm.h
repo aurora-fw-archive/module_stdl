@@ -19,8 +19,7 @@
 #ifndef AURORAFW_STDL_STL__ALGORITHM_H
 #define AURORAFW_STDL_STL__ALGORITHM_H
 
-#include <AuroraFW/STDL/Standard.h>
-#include <AuroraFW/STDL/Target/Language.h>
+#include <AuroraFW/CoreLib/Target/Compiler.h>
 
 #if !defined(AURORAFW_STDL_STL_ALGORITHM_H) && !defined(AFW__PHC)
 	#error "Don't include this header directly, include AuroraFW/STDL/STL/Algorithm.h instead"

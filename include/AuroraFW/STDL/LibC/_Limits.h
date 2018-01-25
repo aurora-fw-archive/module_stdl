@@ -19,8 +19,7 @@
 #ifndef AURORAFW_STDL_LIBC__LIMITS_H
 #define AURORAFW_STDL_LIBC__LIMITS_H
 
-#include <AuroraFW/STDL/Standard.h>
-#include <AuroraFW/STDL/Target/Language.h>
+#include <AuroraFW/CoreLib/Target/Compiler.h>
 
 #if !defined(AURORAFW_STDL_LIBC_LIMITS_H) && !defined(AFW__PHC)
 	#error "Don't include this header directly, include AuroraFW/STDL/LibC/Limits.h instead"
