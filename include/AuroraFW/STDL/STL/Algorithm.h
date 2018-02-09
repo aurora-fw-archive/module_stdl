@@ -19,10 +19,33 @@
 #ifndef AURORAFW_STDL_STL_ALGORITHM_H
 #define AURORAFW_STDL_STL_ALGORITHM_H
 
-#include <AuroraFW/STDL/Global.h>
-#include <AuroraFW/STDL/STL/_Algorithm.h>
+#include <AuroraFW/STDL/Internal/Config.h>
+#include <AuroraFW/STDL/Internal/STL/Algorithm.h>
 
 #if (AFW_STDLIB_CC == 0) || !defined(AURORAFW_STDL_STL__ALGORITHM_H)
 #endif
+namespace afwstd {
+	/**
+	 *	Returns the smallest of the two given variables.
+	 *	@return The smallest variable between a and b.
+	 *	@see inline const T& max()
+	 */
+	template<typename T>
+	inline AFW_CONSTEXPR const T& min(const T& a, const T& b)
+	{
+		return (b < a) ? b : a;
+	}
+
+	/**
+	 *	Returns the biggest of the two given variables.
+	 *	@return The biggest variable between a and b.
+	 *	@see inline const T& min()
+	 */
+	template<typename T>
+	inline AFW_CONSTEXPR const T& max(const T& a, const T& b)
+	{
+		return (a < b) ? b : a;
+	}
+}
 
 #endif // AURORAFW_STDL_STL_ALGORITHM_H

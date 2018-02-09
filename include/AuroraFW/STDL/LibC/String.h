@@ -19,11 +19,10 @@
 #ifndef AURORAFW_STDL_LIBC_STRING_H
 #define AURORAFW_STDL_LIBC_STRING_H
 
-#include <AuroraFW/STDL/Global.h>
-#include <AuroraFW/STDL/LibC/_String.h>
+#include <AuroraFW/STDL/Internal/Config.h>
+#include <AuroraFW/STDL/Internal/LibC/String.h>
 
 #if (AFW_STDLIB_CC == 0) || !defined(AURORAFW_STDL_LIBC__STRING_H)
-
 #endif
 
 #endif // AURORAFW_STDL_LIBC_STRING_H

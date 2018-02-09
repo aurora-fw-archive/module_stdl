@@ -19,8 +19,8 @@
 #ifndef AURORAFW_STDL_STL_VECTOR_H
 #define AURORAFW_STDL_STL_VECTOR_H
 
-#include <AuroraFW/STDL/Global.h>
-#include <AuroraFW/STDL/STL/_Vector.h>
+#include <AuroraFW/STDL/Internal/Config.h>
+#include <AuroraFW/STDL/Internal/STL/Vector.h>
 
 #if (AFW_STDLIB_CC == 0) || !defined(AURORAFW_STDL_STL__VECTOR_H)
 #endif

@@ -19,8 +19,8 @@
 #ifndef AURORAFW_STDL_STL_IOSTREAM_H
 #define AURORAFW_STDL_STL_IOSTREAM_H
 
-#include <AuroraFW/STDL/Global.h>
-#include <AuroraFW/STDL/STL/_IOStream.h>
+#include <AuroraFW/STDL/Internal/Config.h>
+#include <AuroraFW/STDL/Internal/STL/IOStream.h>
 
 #if (AFW_STDLIB_CC == 0) || !defined(AURORAFW_STDL_STL__IOSTREAM_H)
 #endif

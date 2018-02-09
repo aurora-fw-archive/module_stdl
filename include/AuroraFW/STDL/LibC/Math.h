@@ -19,13 +19,13 @@
 #ifndef AURORAFW_STDL_LIBC_MATH_H
 #define AURORAFW_STDL_LIBC_MATH_H
 
-#include <AuroraFW/STDL/Global.h>
-#include <AuroraFW/STDL/LibC/_Math.h>
+#include <AuroraFW/STDL/Internal/Config.h>
+#include <AuroraFW/STDL/Internal/LibC/Math.h>
 
 #if (AFW_STDLIB_CC == 0) || !defined(AURORAFW_STDL_LIBC__MATH_H)
 
-#include <AuroraFW/STDL/Target/Compiler.h>
-#include <AuroraFW/STDL/Target/Language.h>
+#include <AuroraFW/CoreLib/Target/Compiler.h>
+#include <AuroraFW/CoreLib/Target/Language.h>
 
 /** @def NAN
  * Represents a NaN. Define a non-a-number macro for NULL floating-point number.

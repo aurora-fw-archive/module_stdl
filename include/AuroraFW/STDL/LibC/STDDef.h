@@ -19,14 +19,14 @@
 #ifndef AURORAFW_STDL_LIBC_STDDEF_H
 #define AURORAFW_STDL_LIBC_STDDEF_H
 
-#include <AuroraFW/STDL/Global.h>
-#include <AuroraFW/STDL/LibC/_STDDef.h>
+#include <AuroraFW/STDL/Internal/Config.h>
+#include <AuroraFW/STDL/Internal/LibC/STDDef.h>
 
 #if (AFW_STDLIB_CC == 0) || !defined(AURORAFW_STDL_LIBC__STDDEF_H)
 
-#include <AuroraFW/STDL/Target/Compiler.h>
-#include <AuroraFW/STDL/Target/Language.h>
-#include <AuroraFW/STDL/Target/DataModel.h>
+#include <AuroraFW/CoreLib/Target/Compiler.h>
+#include <AuroraFW/CoreLib/Target/Language.h>
+#include <AuroraFW/CoreLib/Target/DataModel.h>
 
 #undef NULL
 #if defined(AFW_TARGET_COMPILER_GNU_GXX) || (!defined(AFW_TARGET_COMPILER_MINGW) && !defined(AFW_TARGET_COMPILER_MICROSOFT))

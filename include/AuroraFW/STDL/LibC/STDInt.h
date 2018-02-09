@@ -19,8 +19,8 @@
 #ifndef AURORAFW_STDL_LIBC_STDINT_H
 #define AURORAFW_STDL_LIBC_STDINT_H
 
-#include <AuroraFW/STDL/Global.h>
-#include <AuroraFW/STDL/LibC/_STDInt.h>
+#include <AuroraFW/STDL/Internal/Config.h>
+#include <AuroraFW/STDL/Internal/LibC/STDInt.h>
 
 #if (AFW_STDLIB_CC == 0) || !defined(AURORAFW_STDL_LIBC__STDINT_H)
 

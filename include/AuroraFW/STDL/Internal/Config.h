@@ -16,12 +16,12 @@
 ** will be met: https://www.gnu.org/licenses/lgpl-3.0.html.
 ****************************************************************************/
 
-/** @file AuroraFW/STDL/Standard.h
- * Define macros for standard libraries usage.
- */
+#ifndef AURORAFW_STDL_CONFIG_H
+#define AURORAFW_STDL_CONFIG_H
 
-#ifndef AURORAFW_STDL_STANDARD_H
-#define AURORAFW_STDL_STANDARD_H
+#ifndef AFW_MODULE_STDL
+	#define AFW_MODULE_STDL
+#endif
 
 /** @def AFW_STDLIB_CC
  * Define if aurora will use Standard C Library
@@ -78,4 +78,10 @@
 	#define AFW_STDLIB_CXX 0
 #endif // AFW__FORCE_NO_STDLIB_CXX
 
-#endif // AURORAFW_STDL_STANDARD_H
+#if AFW_STDLIB_CXX == 0
+	#ifdef AFW_TARGET_CXX
+		namespace std = ::afwstd;
+	#endif
+#endif
+
+#endif // AURORAFW_STDL_CONFIG_H

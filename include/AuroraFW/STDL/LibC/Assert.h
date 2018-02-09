@@ -19,8 +19,8 @@
 #ifndef AURORAFW_STDL_LIBC_ASSERT_H
 #define AURORAFW_STDL_LIBC_ASSERT_H
 
-#include <AuroraFW/STDL/Global.h>
-#include <AuroraFW/STDL/LibC/_Assert.h>
+#include <AuroraFW/STDL/Internal/Config.h>
+#include <AuroraFW/STDL/Internal/LibC/Assert.h>
 
 #if (AFW_STDLIB_CC == 0) || !defined(AURORAFW_STDL_LIBC__ASSERT_H)
 
