@@ -19,7 +19,15 @@
 #ifndef AURORAFW_STDL_STL_ISTREAM_H
 #define AURORAFW_STDL_STL_ISTREAM_H
 
+#include <AuroraFW/CoreLib/Target/Compiler.h>
+#if(AFW_TARGET_PRAGMA_ONCE_SUPPORT)
+	#pragma once
+#endif
+
 #include <AuroraFW/STDL/Internal/Config.h>
+
+//#undef AFW_STDLIB_CC
+//#define AFW_STDLIB_CC 0
 #include <AuroraFW/STDL/Internal/STL/IStream.h>
 
 #if (AFW_STDLIB_CC == 0) || !defined(AURORAFW_STDL_STL__ISTREAM_H)

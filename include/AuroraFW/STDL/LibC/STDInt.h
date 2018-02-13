@@ -16,191 +16,216 @@
 ** will be met: https://www.gnu.org/licenses/lgpl-3.0.html.
 ****************************************************************************/
 
+// TODO : Finish this implementation
+/* TODO: Define this:
+	int_fast8_t
+	int_fast16_t
+	int_fast32_t
+	int_fast64_t
+
+	int_least8_t
+	int_least16_t
+	int_least32_t
+	int_least64_t
+
+	intptr_t
+
+	uint_fast8_t
+	uint_fast16_t
+	uint_fast32_t
+	uint_fast64_t
+
+	uint_least8_t
+	uint_least16_t
+	uint_least32_t
+	uint_least64_t
+
+	uintptr_t
+
+	INT8_MIN
+	INT16_MIN
+	INT32_MIN
+	INT64_MIN
+
+	INT_FAST8_MIN
+	INT_FAST16_MIN
+	INT_FAST32_MIN
+	INT_FAST64_MIN
+
+	INT_LEAST8_MIN
+	INT_LEAST16_MIN
+	INT_LEAST32_MIN
+	INT_LEAST64_MIN
+
+	INTPTR_MIN
+	INTMAX_MIN
+
+	INT8_MAX
+	INT16_MAX
+	INT32_MAX
+	INT64_MAX
+
+	INT_FAST8_MAX
+	INT_FAST16_MAX
+	INT_FAST32_MAX
+	INT_FAST64_MAX
+
+	INT_LEAST8_MAX
+	INT_LEAST16_MAX
+	INT_LEAST32_MAX
+	INT_LEAST64_MAX
+
+	INTPTR_MAX
+
+	INTMAX_MAX
+
+	UINT8_MAX
+	UINT16_MAX
+	UINT32_MAX
+	UINT64_MAX
+
+	UINT_FAST8_MAX
+	UINT_FAST16_MAX
+	UINT_FAST32_MAX
+	UINT_FAST64_MAX
+
+	UINT_LEAST8_MAX
+	UINT_LEAST16_MAX
+	UINT_LEAST32_MAX
+	UINT_LEAST64_MAX
+
+	UINTPTR_MAX
+
+	UINTMAX_MAX
+
+	INT8_C
+	INT16_C
+	INT32_C
+	INT64_C
+
+	INTMAX_C
+
+	UINT8_C
+	UINT16_C
+	UINT32_C
+	UINT64_C
+
+	UINTMAX_C
+*/
+
 #ifndef AURORAFW_STDL_LIBC_STDINT_H
 #define AURORAFW_STDL_LIBC_STDINT_H
 
+#include <AuroraFW/CoreLib/Target/Compiler.h>
+#if(AFW_TARGET_PRAGMA_ONCE_SUPPORT)
+	#pragma once
+#endif
+
 #include <AuroraFW/STDL/Internal/Config.h>
+
+//#undef AFW_STDLIB_CC
+//#define AFW_STDLIB_CC 0
 #include <AuroraFW/STDL/Internal/LibC/STDInt.h>
 
-#if (AFW_STDLIB_CC == 0) || !defined(AURORAFW_STDL_LIBC__STDINT_H)
+#if (AFW_STDLIB_CC == 0) || !defined(AURORAFW_STDL_LIBC__STDINT_H) && \
+	!(defined(_STDINT_H) || defined(__STDINT_H_) || defined(_GCC_WRAP_STDINT_H) || defined(_GLIBCXX_CSTDINT))
 
+	#if !_GLIBCXX_HAVE_STDINT_H
+		/* Largest integral types. */
+		#if AFW_TARGET_WORDSIZE == 64
+			typedef long int intmax_t;
+			typedef unsigned long int uintmax_t;
+		#else
+			#ifdef AFW_TARGET_COMPILER_GNU
+				__extension__ typedef long long int intmax_t;
+				__extension__ typedef unsigned long long int uintmax_t;
+			#else
+				typedef long long int intmax_t;
+				typedef unsigned long long int uintmax_t;
+			#endif
+		#endif
+	#endif
 
-#ifdef __INT64_TYPE__
-	#define INT64_MAX INT64_C( 9223372036854775807)
-	#define INT64_MIN (-INT64_C( 9223372036854775807)-1)
-	#define UINT64_MAX UINT64_C(18446744073709551615)
-	#define __INT_LEAST64_MIN INT64_MIN
-	#define __INT_LEAST64_MAX INT64_MAX
-	#define __UINT_LEAST64_MAX UINT64_MAX
-	#define __INT_LEAST32_MIN INT64_MIN
-	#define __INT_LEAST32_MAX INT64_MAX
-	#define __UINT_LEAST32_MAX UINT64_MAX
-	#define __INT_LEAST16_MIN INT64_MIN
-	#define __INT_LEAST16_MAX INT64_MAX
-	#define __UINT_LEAST16_MAX UINT64_MAX
-	#define __INT_LEAST8_MIN INT64_MIN
-	#define __INT_LEAST8_MAX INT64_MAX
-	#define __UINT_LEAST8_MAX UINT64_MAX
-#endif // __INT64_TYPE__
+	/* Fixed-size types, underlying types depend on word size and compiler. */
+	#if !defined(_BITS_STDINT_INTN_H)
+		#if !(defined(__int8_t_defined) || defined(INT8_MAX) || defined(__INT8_MAX__) \
+			defined(INT8_MIN) || defined(__INT8_MIN__))
+			#define __int8_t_defined
+			typedef signed char int8_t;
+		#else
+			typedef __int8_t int8_t;
+		#endif // __int8_t_defined
 
-#ifdef __INT_LEAST64_MIN
-	#define INT_LEAST64_MIN __INT_LEAST64_MIN
-	#define INT_LEAST64_MAX __INT_LEAST64_MAX
-	#define UINT_LEAST64_MAX __UINT_LEAST64_MAX
-	#define INT_FAST64_MIN __INT_LEAST64_MIN
-	#define INT_FAST64_MAX __INT_LEAST64_MAX
-	#define UINT_FAST64_MAX __UINT_LEAST64_MAX
-#endif // __INT_LEAST64_MIN
+		#if !(defined(__int16_t_defined) || defined(INT16_MAX) || defined(__INT16_MAX__) \
+			defined(INT16_MIN) || defined(__INT16_MIN__))
+			#define __int16_t_defined
+			typedef signed short int int16_t;
+		#else
+			typedef __int16_t int16_t;
+		#endif // __int16_t_defined
 
-#ifdef __INT56_TYPE__
-	#define INT56_MAX INT56_C(36028797018963967)
-	#define INT56_MIN (-INT56_C(36028797018963967)-1)
-	#define UINT56_MAX UINT56_C(72057594037927935)
-	#define INT_LEAST56_MIN INT56_MIN
-	#define INT_LEAST56_MAX INT56_MAX
-	#define UINT_LEAST56_MAX UINT56_MAX
-	#define INT_FAST56_MIN INT56_MIN
-	#define INT_FAST56_MAX INT56_MAX
-	#define UINT_FAST56_MAX UINT56_MAX
-	#define __INT_LEAST32_MIN INT56_MIN
-	#define __INT_LEAST32_MAX INT56_MAX
-	#define __UINT_LEAST32_MAX UINT56_MAX
-	#define __INT_LEAST16_MIN INT56_MIN
-	#define __INT_LEAST16_MAX INT56_MAX
-	#define __UINT_LEAST16_MAX UINT56_MAX
-	#define __INT_LEAST8_MIN INT56_MIN
-	#define __INT_LEAST8_MAX INT56_MAX
-	#define __UINT_LEAST8_MAX UINT56_MAX
-#endif // __INT56_TYPE__
+		#if !(defined(__int32_t_defined) || defined(INT32_MAX) || defined(__INT32_MAX__) \
+			defined(INT32_MIN) || defined(__INT32_MIN__))
+			#define __int32_t_defined
+			typedef signed int int32_t;
+		#else
+			typedef __int32_t int32_t;
+		#endif // __int32_t_defined
+		
+		#if !(defined(__int64_t_defined) || defined(INT64_MAX) || defined(__INT64_MAX__) \
+			defined(INT64_MIN) || defined(__INT64_MIN__))
+			#define __int64_t_defined
+			#if AFW_TARGET_WORDSIZE == 64
+				typedef signed long int int64_t;
+			#else
+				#ifdef AFW_TARGET_COMPILER_GNU
+					__extension__ typedef signed long long int int64_t;
+				#else
+					typedef signed long long int int64_t;
+				#endif
+			#endif // AFW_TARGET_WORDSIZE
+		#else
+			typedef __int64_t int64_t;
+		#endif // __int64_t_defined
+	#endif
 
-#ifdef __INT48_TYPE__
-	#define INT48_MAX INT48_C(140737488355327)
-	#define INT48_MIN (-INT48_C(140737488355327)-1)
-	#define UINT48_MAX UINT48_C(281474976710655)
-	#define INT_LEAST48_MIN INT48_MIN
-	#define INT_LEAST48_MAX INT48_MAX
-	#define UINT_LEAST48_MAX UINT48_MAX
-	#define INT_FAST48_MIN INT48_MIN
-	#define INT_FAST48_MAX INT48_MAX
-	#define UINT_FAST48_MAX UINT48_MAX
-	#define __INT_LEAST32_MIN INT48_MIN
-	#define __INT_LEAST32_MAX INT48_MAX
-	#define __UINT_LEAST32_MAX UINT48_MAX
-	#define __INT_LEAST16_MIN INT48_MIN
-	#define __INT_LEAST16_MAX INT48_MAX
-	#define __UINT_LEAST16_MAX UINT48_MAX
-	#define __INT_LEAST8_MIN INT48_MIN
-	#define __INT_LEAST8_MAX INT48_MAX
-	#define __UINT_LEAST8_MAX UINT48_MAX
-#endif // __INT48_TYPE__
+	#if !defined(_BITS_STDINT_UINTN_H)
+		#if !(defined(__uint8_t_defined) || defined(UINT8_MAX) || defined(__UINT8_MAX__))
+			#define __uint8_t_defined
+			typedef unsigned char uint8_t;
+		#else
+			typedef __uint8_t uint8_t;
+		#endif // __uint8_t_defined
 
-#ifdef __INT40_TYPE__
-	#define INT40_MAX INT40_C(549755813887)
-	#define INT40_MIN (-INT40_C(549755813887)-1)
-	#define UINT40_MAX UINT40_C(1099511627775)
-	#define INT_LEAST40_MIN INT40_MIN
-	#define INT_LEAST40_MAX INT40_MAX
-	#define UINT_LEAST40_MAX UINT40_MAX
-	#define INT_FAST40_MIN INT40_MIN
-	#define INT_FAST40_MAX INT40_MAX
-	#define UINT_FAST40_MAX UINT40_MAX
-	#define __INT_LEAST32_MIN INT40_MIN
-	#define __INT_LEAST32_MAX INT40_MAX
-	#define __UINT_LEAST32_MAX UINT40_MAX
-	#define __INT_LEAST16_MIN INT40_MIN
-	#define __INT_LEAST16_MAX INT40_MAX
-	#define __UINT_LEAST16_MAX UINT40_MAX
-	#define __INT_LEAST8_MIN INT40_MIN
-	#define __INT_LEAST8_MAX INT40_MAX
-	#define __UINT_LEAST8_MAX UINT40_MAX
-#endif // __INT40_TYPE__
+		#if !(defined(__uint16_t_defined) || defined(UINT16_MAX) || defined(__UINT16_MAX__))
+			#define __uint16_t_defined
+			typedef unsigned short int uint16_t;
+		#else
+			typedef __uint16_t uint16_t;
+		#endif // __uint16_t_defined
 
-#ifdef __INT32_TYPE__
-	#define INT32_MAX INT32_C(2147483647)
-	#define INT32_MIN (-INT32_C(2147483647)-1)
-	#define UINT32_MAX UINT32_C(4294967295)
-	#define __INT_LEAST32_MIN INT32_MIN
-	#define __INT_LEAST32_MAX INT32_MAX
-	#define __UINT_LEAST32_MAX UINT32_MAX
-	#define __INT_LEAST16_MIN INT32_MIN
-	#define __INT_LEAST16_MAX INT32_MAX
-	#define __UINT_LEAST16_MAX UINT32_MAX
-	#define __INT_LEAST8_MIN INT32_MIN
-	#define __INT_LEAST8_MAX INT32_MAX
-	#define __UINT_LEAST8_MAX UINT32_MAX
-#endif // __INT32_TYPE__
+		#if !(defined(__uint32_t_defined) || defined(UINT32_MAX) || defined(__UINT32_MAX__))
+			#define __uint32_t_defined
+			typedef unsigned int uint32_t;
+		#else
+			typedef __uint32_t uint32_t;
+		#endif // __uint32_t_defined
 
-#ifdef __INT_LEAST32_MIN
-	#define INT_LEAST32_MIN __INT_LEAST32_MIN
-	#define INT_LEAST32_MAX __INT_LEAST32_MAX
-	#define UINT_LEAST32_MAX __UINT_LEAST32_MAX
-	#define INT_FAST32_MIN __INT_LEAST32_MIN
-	#define INT_FAST32_MAX __INT_LEAST32_MAX
-	#define UINT_FAST32_MAX __UINT_LEAST32_MAX
-#endif // __INT_LEAST32_MIN
-
-#ifdef __INT24_TYPE__
-	#define INT24_MAX INT24_C(8388607)
-	#define INT24_MIN (-INT24_C(8388607)-1)
-	#define UINT24_MAX UINT24_C(16777215)
-	#define INT_LEAST24_MIN INT24_MIN
-	#define INT_LEAST24_MAX INT24_MAX
-	#define UINT_LEAST24_MAX UINT24_MAX
-	#define INT_FAST24_MIN INT24_MIN
-	#define INT_FAST24_MAX INT24_MAX
-	#define UINT_FAST24_MAX UINT24_MAX
-	#define __INT_LEAST16_MIN INT24_MIN
-	#define __INT_LEAST16_MAX INT24_MAX
-	#define __UINT_LEAST16_MAX UINT24_MAX
-	#define __INT_LEAST8_MIN INT24_MIN
-	#define __INT_LEAST8_MAX INT24_MAX
-	#define __UINT_LEAST8_MAX UINT24_MAX
-#endif // __INT24_TYPE__
-
-
-#ifdef __INT16_TYPE__
-	#define INT16_MAX INT16_C(32767)
-	#define INT16_MIN (-INT16_C(32767)-1)
-	#define UINT16_MAX UINT16_C(65535)
-	#define __INT_LEAST16_MIN INT16_MIN
-	#define __INT_LEAST16_MAX INT16_MAX
-	#define __UINT_LEAST16_MAX UINT16_MAX
-	#define __INT_LEAST8_MIN INT16_MIN
-	#define __INT_LEAST8_MAX INT16_MAX
-	#define __UINT_LEAST8_MAX UINT16_MAX
-#endif // __INT16_TYPE__
-
-#ifdef __INT_LEAST16_MIN
-	#define INT_LEAST16_MIN __INT_LEAST16_MIN
-	#define INT_LEAST16_MAX __INT_LEAST16_MAX
-	#define UINT_LEAST16_MAX __UINT_LEAST16_MAX
-	#define INT_FAST16_MIN __INT_LEAST16_MIN
-	#define INT_FAST16_MAX __INT_LEAST16_MAX
-	#define UINT_FAST16_MAX __UINT_LEAST16_MAX
-#endif // __INT_LEAST16_MIN
-
-
-#ifdef __INT8_TYPE__
-	#define INT8_MAX INT8_C(127)
-	#define INT8_MIN (-INT8_C(127)-1)
-	#define UINT8_MAX UINT8_C(255)
-	#define __INT_LEAST8_MIN INT8_MIN
-	#define __INT_LEAST8_MAX INT8_MAX
-	#define __UINT_LEAST8_MAX UINT8_MAX
-#endif // __INT8_TYPE__
-
-#ifdef __INT_LEAST8_MIN
-	#define INT_LEAST8_MIN __INT_LEAST8_MIN
-	#define INT_LEAST8_MAX __INT_LEAST8_MAX
-	#define UINT_LEAST8_MAX __UINT_LEAST8_MAX
-	#define INT_FAST8_MIN __INT_LEAST8_MIN
-	#define INT_FAST8_MAX __INT_LEAST8_MAX
-	#define UINT_FAST8_MAX __UINT_LEAST8_MAX
-#endif // __INT_LEAST8_MIN
-
-#define INTMAX_C(v) __int_c(v, __INTMAX_C_SUFFIX__)
-#define UINTMAX_C(v) __int_c(v, __UINTMAX_C_SUFFIX__)
-
+		#if !(defined(__uint64_t_defined) || defined(UINT64_MAX) || defined(__UINT64_MAX__))
+			#define __uint64_t_defined
+			#if AFW_TARGET_WORDSIZE == 64
+				typedef unsigned long int uint64_t;
+			#else
+				#ifdef AFW_TARGET_COMPILER_GNU
+					__extension__ typedef unsigned long long int uint64_t;
+				#else
+					typedef unsigned long long int uint64_t;
+				#endif
+			#endif // AFW_TARGET_WORDSIZE
+		#else
+			typedef __uint64_t uint64_t;
+		#endif // __uint64_t_defined
+	#endif
 #endif
 
 #endif // AURORAFW_STDL_LIBC_STDINT_H
