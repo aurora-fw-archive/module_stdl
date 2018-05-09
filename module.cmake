@@ -39,7 +39,7 @@ if(AURORAFW_PCH)
 	add_precompiled_header(aurorafw-stdl-cc-static "${AURORAFW_MODULE_STDL_HEADERS}")
 endif()
 
-#set_target_properties(aurorafw-stdl-cc PROPERTIES COMPILE_FLAGS "-nodefaultlibs -nostdlib -static-libgcc")
+set_target_properties(aurorafw-stdl-cc PROPERTIES COMPILE_FLAGS "-nodefaultlibs -nostdlib -static-libgcc")
 set_target_properties(aurorafw-stdl-cc-static PROPERTIES COMPILE_FLAGS "-nodefaultlibs -nostdlib -static-libgcc")
 #set_target_properties(aurorafw-stdl-cpp PROPERTIES COMPILE_FLAGS "-nodefaultlibs -nostdlib -static-libgcc -static-libstdc++")
 #set_target_properties(aurorafw-stdl-cpp-static PROPERTIES COMPILE_FLAGS "-nodefaultlibs -nostdlib -static-libgcc -static-libstdc++")
